@@ -1,0 +1,5 @@
+Cypress.Commands.add('efetuarLogin', (email, senha) => {
+    cy.get('#email').type(email)
+    cy.get('#password').type(senha)
+    cy.get('.sc-jSwlEQ').click()
+})
