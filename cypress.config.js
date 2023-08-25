@@ -7,4 +7,7 @@ module.exports = defineConfig({
     },
     "baseUrl":"https://wallet-life.vercel.app"
   },
+  chromeWebSecurity: false,
 });
+
+
