@@ -50,11 +50,24 @@ describe('Efetuar Login', () => {
     })
   })
 
-  it.only('validar efetuar login com senha menor que 5 dígitos', () => {
+  it('validar efetuar login com senha menor que 5 dígitos', () => {
     cy.fixture('usuario.data.json').then(data => {
       cy.efetuarLogin(data.usuario[0].email, '123')
       cy.get('.Toastify__toast-body > :nth-child(2)').should('contain', 'Usuário e/ou senha incorretos')
     })
+  })
+
+  it('validar efetuar login com senha incorreta', () => {
+
+    //Cadastrar novo usuário com dados faker
+    // cy.fixture('usuario.data.json').then(data => {
+    // cy.cadastrarUsuario(dadosDoUsuario)
+    // cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+    // cy.assertLogado
+    // })
+
+      cy.efetuarLogin('inazuma@gmail.com', 'ABCDE')
+      cy.get('.Toastify__toast-body > :nth-child(2)').should('contain', 'Usuário e/ou senha incorretos')
   })
 
 })
