@@ -9,6 +9,7 @@ Cypress.Commands.add('generateFixture', () => {
         return {
           'email':`${faker.internet.email()}`,
           'senha':`${faker.internet.password()}`,
+          'nome':`${faker.internet.userName()}`,
         }
       }),
     })
