@@ -1,4 +1,12 @@
 {
-  "email": "joaoleitao@gmail.com",
-  "senha": "123456"
+  "usuario": [
+    {
+      "email": "Calebe.Moreira@gmail.com",
+      "senha": "EVl0dMp_I9lv9tl"
+    },
+    {
+      "email": "Antonella_Reis@live.com",
+      "senha": "oDdDzfqJyGzSliB"
+    }
+  ]
 }
