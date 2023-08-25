@@ -27,4 +27,10 @@ describe('Efetuar Login', () => {
     })
   })
 
+  it('validar efetuar login sem e-mail', () => {
+    cy.fixture('usuario.data.json').then(data => {
+      cy.loginSemEmail(data.usuario[0].senha)
+      cy.get('.Toastify__toast-body > :nth-child(2)').should('contain', 'É necessário preencher todos os campos')
+    })
+  })
 })
