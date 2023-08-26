@@ -22,7 +22,6 @@ Cypress.Commands.add('generateFixtureCadastro', () => {
     cy.writeFile('cypress/fixtures/cadastro.dataGenerator.json', {
         'usuario': userData
     });
-
 })
 
 
