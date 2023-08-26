@@ -4,10 +4,11 @@ describe('Fale Conosco', () => {
 
     beforeEach(() => {
         cy.visit("/")
+        cy.generateFaleConoscoFixture();
     });
 
     it('Validar Fale Conosco', () => {
-        cy.fixture(usuario.data.json).then(data => {
+        cy.fixture('faleConosco.data.json').then(data => {
             cy.faleConosco(data.nome, data.email, data.descricao)
         })
 
