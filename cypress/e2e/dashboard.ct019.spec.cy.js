@@ -1,10 +1,9 @@
 /// <reference types="cypress"/>
 
-describe('Botão receitas', () => {
+describe.only('Botão receitas', () => {
 
     beforeEach(() => {
         cy.visit("/login")
-        cy.generateFixture()
     });
   
     it('validar botão receitas com sucesso', () => {
