@@ -14,8 +14,8 @@ describe('Validar botão "Despesas" com sucesso', () => {
       cy.url().should('eq', 'https://wallet-life.vercel.app/sua-carteira') // Verificar pagina sua carteira 
       cy.get('#root > div > header > div > a:nth-child(4)').click() // clicar em investimentos 
       cy.url().should('eq', 'https://wallet-life.vercel.app/investimentos') // Verificar pagina investimentos 
-      cy.get('#root > div > header > div > a:nth-child(3)').click() // clicar em receitas
-      cy.url().should('eq', 'https://wallet-life.vercel.app/despesas') // verificar receitas
+      cy.get('#root > div > header > div > a:nth-child(3)').click() // clicar em despesas
+      cy.url().should('eq', 'https://wallet-life.vercel.app/despesas') // verificar despesas
     })
   
   })
