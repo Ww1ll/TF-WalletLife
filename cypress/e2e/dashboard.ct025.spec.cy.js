@@ -6,7 +6,7 @@ describe('Dashboard', () => {
   
     it('validar botao "seus investimento" com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.efetuarLogin(data.email, data.password)
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
           })
           cy.get('.navegacao > [href="/investimentos"]').click();
           cy.get('.sc-bcPKhP').should('exist');
