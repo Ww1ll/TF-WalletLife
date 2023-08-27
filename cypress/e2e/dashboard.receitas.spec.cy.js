@@ -3,7 +3,8 @@
 describe('Dashboard Receitas', () => {
     
     beforeEach(() => {
-        cy.visit("/login")
+        cy.visit("/")
+        cy.generateFixture();
     })
 
     it('CT028 - Validar botão "+" com sucesso', () => {
