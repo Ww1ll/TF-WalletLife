@@ -3,15 +3,17 @@
 describe('Seus Investimentos', () => {
 
     beforeEach(() => {
-        cy.visit("/")
-       // cy.generateFaleConoscoFixture();
+        cy.visit("/login")
+    
     });
 
-    // it('Validar Fale Conosco', () => {
-    //     cy.fixture('faleConosco.data.json').then(data => {
-    //         cy.faleConosco(data.nome, data.email, data.descricao)
-    //     })
+    it('Validar Seus Investimentos', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.get('[href="/investimentos"] > .card-option').click()
+            cy.get('.sc-bcPKhP').should('contain', 'INVESTIMENTOS')
+        })
 
-    // })
+    })
 })
 
