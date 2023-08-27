@@ -18,8 +18,7 @@ Cypress.Commands.add('generateFixture', () => {
 
   cy.writeFile('cypress/fixtures/usuario.data.json', {
     'usuario':Cypress._.times(2, () => {
-      var faker = require('faker')
-      var fakerBr = require('faker-br')
+
       faker.locale='pt_BR'
       return {
         'email': `${faker.internet.email()}`,
@@ -30,4 +29,26 @@ Cypress.Commands.add('generateFixture', () => {
       }
     }),
   })
+})
+
+Cypress.Commands.add('generateFaleConoscoFixture', () => {
+
+  const faker = require('faker')
+  cy.writeFile('cypress/fixtures/faleConosco.data.json', {
+    'faleConosco':Cypress._.times(1, () => {
+      return {
+        'nome':`${faker.internet.userName()}`,
+        'email':`${faker.internet.email()}`,
+        'descricao':`${faker.lorem.paragraph()}`,
+      }
+    }),
+  })
+})
+
+Cypress.Commands.add('criarUsuarioELogarNoSistema', (nome, email, dataNascimento, cpf, senha) => {
+  cy.visit("/cadastro")
+  cy.cadastrarUsuario(nome, email, dataNascimento, cpf, senha)
+  cy.get('.Toastify__toast-body > :nth-child(2)').should('contain', 'Usuário cadastrado com sucesso!')
+  cy.get('#email').clear()
+  cy.efetuarLogin(email, senha)
 })
