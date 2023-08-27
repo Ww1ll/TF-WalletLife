@@ -1,18 +1,5 @@
 {
   "usuario": [
-    {
-      "nome": "Heloísa",
-      "email": "MariaJlia.Souza@hotmail.com",
-      "dataNascimento": "2023-05-29",
-      "cpf": "29356348707",
-      "senha": "BEjch52Fbai_ktL"
-    },
-    {
-      "nome": "Fábio",
-      "email": "Alessandro_Martins59@live.com",
-      "dataNascimento": "2023-01-05",
-      "cpf": "23597103898",
-      "senha": "4GM1oeWkh7h3nt3"
-    }
+    null
   ]
 }
