@@ -18,6 +18,19 @@ describe('Home Page', () => {
         cy.get('.sc-bcPKhP').should('contain', 'LOGIN')
     })
 
+    it('CT003 - Validar botão "Entrar na plataforma!" com sucesso', () => {     
+        cy.get('#root > div > div.sc-pqitP.bSzvfc > div.hero-text > a > button').click()           
+            cy.get('.sc-bcPKhP').contains('LOGIN')
+    })
+    
+    it('CT004 - Validar botão "entrar na plataforma(1)!" com sucesso', () => {
+        cy.clicarEntrarNaPlataforma1();
+    })
+
+    it('CT004 - Validar botão "entrar na plataforma(2)!" com sucesso', () => {
+        cy.clicarEntrarNaPlataforma2();
+    })
+
     it('CT005 - Validar Fale Conosco com sucesso', () => {
         cy.fixture('faleConosco.data.json').then(data => {
             cy.faleConosco(data.faleConosco[0].nome,  data.faleConosco[0].email, data.faleConosco[0].descricao)
@@ -45,6 +58,12 @@ describe('Home Page', () => {
             cy.get('.styled-input > .Toastify > .Toastify__toast-container > #\\31  > .Toastify__toast-body > :nth-child(2)').should('contain', 'É necessário preencher todos os campos!')
         })
     })
+
+    it('CT006 - Validar botão "Login" no rodapé com sucesso', () => {   
+
+        cy.get('#root > div > footer > div.left-section > a.login').click()           
+            cy.get('.sc-bcPKhP').contains('LOGIN').scrollIntoView().should('be.visible');
+    })      
 
     it('CT007 - Validar botão cadastrar com sucesso', () => {
         cy.get('[href="/cadastro"] > .sc-jSwlEQ').click()
