@@ -1,4 +1,11 @@
 {
-  "email": "joaoleitao@gmail.com",
-  "senha": "12345"
+  "usuario": [
+    {
+      "email": "MariaLuiza.Carvalho@yahoo.com",
+      "senha": "NncCpgFIdtnnb6w",
+      "nomeCompleto": "Maria Júlia Melo",
+      "dataNascimento": "1934-01-24",
+      "cpf": "85466525464"
+    }
+  ]
 }
