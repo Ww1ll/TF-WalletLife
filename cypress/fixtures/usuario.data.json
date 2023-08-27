@@ -1,8 +1,18 @@
 {
   "usuario": [
     {
-      "email": "joaoleitao@gmail.com",
-      "senha": "12345"
+      "email": "Bryan_Costa@yahoo.com",
+      "senha": "Cgdzj0lZSGsFHUi",
+      "nomeCompleto": "Júlia Costa",
+      "dataNascimento": "1962-01-16",
+      "cpf": "81400011477"
+    },
+    {
+      "email": "MariaCeclia2@bol.com.br",
+      "senha": "veIN0FTQQejPdRD",
+      "nomeCompleto": "Maria Júlia Albuquerque",
+      "dataNascimento": "1979-03-25",
+      "cpf": "14776806754"
     }
   ]
 }
