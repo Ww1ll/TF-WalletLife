@@ -66,5 +66,10 @@ describe('Efetuar Login', () => {
     cy.get('strong > a').click()
     cy.get('.sc-bcPKhP').should('contain', 'CADASTRO')
     
-})
+  })
+
+  it('CT017 - Validar botão da logo com sucesso', () => {
+    cy.get('#root > main > div.header > a > img').click()
+    cy.url().should('eq', 'https://wallet-life.vercel.app/')
+  })
 })
