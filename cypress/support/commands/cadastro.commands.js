@@ -24,7 +24,6 @@ Cypress.Commands.add('generateFixtureCadastro', () => {
     });
 })
 
-
 Cypress.Commands.add('cadastrarUsuario', (name,email,dateBith,cpf,password) => {    
     cy.get('#name').type(name)
     cy.get('#email').type(email)
