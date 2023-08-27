@@ -1,8 +1,4 @@
-const { pt_BR } = require('faker/lib/locales')
-import {format} from 'date-fns';
-
 Cypress.Commands.add('generateFixture', () => {
-
   const faker = require('faker');
   const fakerBr = require('faker-br');
 
@@ -19,24 +15,40 @@ Cypress.Commands.add('generateFixture', () => {
     
     return `${randomYear}-${randomMonth}-${randomDay}`;
   }
-    
+
   cy.writeFile('cypress/fixtures/usuario.data.json', {
-        'usuario':Cypress._.times(2, () => {
-          const pastDate = faker.date.past();
-          const formattedPastDate = format(pastDate, 'yyyy-MM-dd');
-          return {
-            'email': `${faker.internet.email()}`,
-            'senha': `${faker.internet.password()}`,
-            'nomeCompleto': `${faker.name.firstName()} ${faker.name.lastName()}`,
-            'dataNascimento': `${generateRandomBirthday()}`,
-            'cpf': `${fakerBr.br.cpf()}`,
-            'nome':`${faker.name.firstName()}`,
-            'email':`${faker.internet.email()}`,
-            'dataNascimento':`${formattedPastDate}`,
-            'cpf':`${fakerBr.br.cpf()}`,
-            'senha':`${faker.internet.password()}`,
-          
-          }
-        }),
-      })
-    });
+    'usuario':Cypress._.times(2, () => {
+
+      faker.locale='pt_BR'
+      return {
+        'email': `${faker.internet.email()}`,
+        'senha': `${faker.internet.password()}`,
+        'nomeCompleto': `${faker.name.firstName()} ${faker.name.lastName()}`,
+        'dataNascimento': `${generateRandomBirthday()}`,
+        'cpf': `${fakerBr.br.cpf()}`          
+      }
+    }),
+  })
+})
+
+Cypress.Commands.add('generateFaleConoscoFixture', () => {
+
+  const faker = require('faker')
+  cy.writeFile('cypress/fixtures/faleConosco.data.json', {
+    'faleConosco':Cypress._.times(1, () => {
+      return {
+        'nome':`${faker.internet.userName()}`,
+        'email':`${faker.internet.email()}`,
+        'descricao':`${faker.lorem.paragraph()}`,
+      }
+    }),
+  })
+})
+
+Cypress.Commands.add('criarUsuarioELogarNoSistema', (nome, email, dataNascimento, cpf, senha) => {
+  cy.visit("/cadastro")
+  cy.cadastrarUsuario(nome, email, dataNascimento, cpf, senha)
+  cy.get('.Toastify__toast-body > :nth-child(2)').should('contain', 'Usuário cadastrado com sucesso!')
+  cy.get('#email').clear()
+  cy.efetuarLogin(email, senha)
+})
