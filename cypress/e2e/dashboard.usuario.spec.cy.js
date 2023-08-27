@@ -87,7 +87,7 @@ describe('Dashboard Usuário', () => {
       cy.url().should('eq', 'https://wallet-life.vercel.app/')
     })
 
-    it.only('CT0022 - Validar Meus Dados com sucesso', () => {
+    it.only('CT022 - Validar Meus Dados com sucesso', () => {
       cy.fixture('usuario.data.json').then(data => {
         cy.visit("/login")
         cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
