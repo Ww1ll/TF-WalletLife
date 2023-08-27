@@ -5,8 +5,8 @@ describe('Investimentos', () => {
     });
   
     it('validar botao "seus investimento" com sucesso', () => {
-        cy.fixture('usuario.data.json').then(data => {
-            cy.efetuarLogin(data.email, data.password)
+        cy.fixture('login.data.json').then(data => {
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
           })
           cy.get('.navegacao > [href="/investimentos"]').click();  
           cy.get('#root > div > section > div.sc-fEyylQ.btjKnk > h2').contains('INVESTIMENTOS');        
