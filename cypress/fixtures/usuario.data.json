@@ -1,14 +1,18 @@
 {
   "usuario": [
     {
-      "email": "Valentina77@hotmail.com",
-      "senha": "8NnI7jnjeHx9t8u",
-      "nome": "Pablo_Costa"
+      "nome": "Heloísa",
+      "email": "MariaJlia.Souza@hotmail.com",
+      "dataNascimento": "2023-05-29",
+      "cpf": "29356348707",
+      "senha": "BEjch52Fbai_ktL"
     },
     {
-      "email": "PedroHenrique_Santos60@gmail.com",
-      "senha": "3QsbDzjn7K_acje",
-      "nome": "Isabel38"
+      "nome": "Fábio",
+      "email": "Alessandro_Martins59@live.com",
+      "dataNascimento": "2023-01-05",
+      "cpf": "23597103898",
+      "senha": "4GM1oeWkh7h3nt3"
     }
   ]
 }
