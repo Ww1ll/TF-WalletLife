@@ -1,11 +1,18 @@
 {
   "usuario": [
     {
-      "email": "MariaLuiza.Carvalho@yahoo.com",
-      "senha": "NncCpgFIdtnnb6w",
-      "nomeCompleto": "Maria Júlia Melo",
-      "dataNascimento": "1934-01-24",
-      "cpf": "85466525464"
+      "nome": "Heloísa",
+      "email": "MariaJlia.Souza@hotmail.com",
+      "dataNascimento": "2023-05-29",
+      "cpf": "29356348707",
+      "senha": "BEjch52Fbai_ktL"
+    },
+    {
+      "nome": "Fábio",
+      "email": "Alessandro_Martins59@live.com",
+      "dataNascimento": "2023-01-05",
+      "cpf": "23597103898",
+      "senha": "4GM1oeWkh7h3nt3"
     }
   ]
 }

@@ -1,3 +1,6 @@
+const { pt_BR } = require('faker/lib/locales')
+import {format} from 'date-fns';
+
 Cypress.Commands.add('generateFixture', () => {
 
     const faker = require('faker');
@@ -19,12 +22,25 @@ Cypress.Commands.add('generateFixture', () => {
     
     cy.writeFile('cypress/fixtures/usuario.data.json', {
       'usuario':Cypress._.times(1, () => {
+    var faker = require('faker')
+    var fakerBr = require('faker-br')
+    faker.locale='pt_BR'
+    cy.writeFile('cypress/fixtures/usuario.data.json', {
+      'usuario':Cypress._.times(2, () => {
+        const pastDate = faker.date.past();
+        const formattedPastDate = format(pastDate, 'yyyy-MM-dd');
         return {
           'email': `${faker.internet.email()}`,
           'senha': `${faker.internet.password()}`,
           'nomeCompleto': `${faker.name.firstName()} ${faker.name.lastName()}`,
           'dataNascimento': `${generateRandomBirthday()}`,
           'cpf': `${fakerBr.br.cpf()}`,
+          'nome':`${faker.name.firstName()}`,
+          'email':`${faker.internet.email()}`,
+          'dataNascimento':`${formattedPastDate}`,
+          'cpf':`${fakerBr.br.cpf()}`,
+          'senha':`${faker.internet.password()}`,
+          
         }
       }),
     })
