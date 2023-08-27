@@ -7,7 +7,7 @@ describe('Dashboard - Investimentos', () => {
         cy.generateFixture();
     })
 
-    it.only('CT036 - Validar botão "+" com sucesso', () => {
+    it('CT036 - Validar botão "+" com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.criarUsuarioELogarNoSistema(data.usuario[0].nomeCompleto, data.usuario[0].email, data.usuario[0].dataNascimento, data.usuario[0].cpf, data.usuario[0].senha)
             cy.get('#root > div > header > div.navegacao > a:nth-child(4)').click()
@@ -60,7 +60,7 @@ describe('Dashboard - Investimentos', () => {
         })
     })
 
-    it.only('CT056 - Validar botão Logo na tela Investimentos com sucesso', () => {
+    it('CT056 - Validar botão Logo na tela Investimentos com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.visit("/login")
             cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
