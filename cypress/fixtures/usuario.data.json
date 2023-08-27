@@ -1,8 +1,20 @@
 {
   "usuario": [
     {
-      "email": "joaoleitao@gmail.com",
-      "senha": "12345"
+      "email": "Sulen.Franco@bol.com.br",
+      "senha": "EhQxjDRCk5vcsn4",
+      "nomeCompleto": "Sirineu Nogueira",
+      "dataNascimento": "2023-06-04",
+      "cpf": "85527855876",
+      "nome": "Maria Alice"
+    },
+    {
+      "email": "Alice58@yahoo.com",
+      "senha": "6Us8dzWjSkhV5H5",
+      "nomeCompleto": "Maitê Melo",
+      "dataNascimento": "2023-03-20",
+      "cpf": "38054353200",
+      "nome": "César"
     }
   ]
 }

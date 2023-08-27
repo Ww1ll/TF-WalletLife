@@ -21,11 +21,6 @@ Cypress.Commands.add('generateFixture', () => {
   }
     
   cy.writeFile('cypress/fixtures/usuario.data.json', {
-    'usuario':Cypress._.times(1, () => {
-      var faker = require('faker')
-      var fakerBr = require('faker-br')
-      faker.locale='pt_BR'
-      cy.writeFile('cypress/fixtures/usuario.data.json', {
         'usuario':Cypress._.times(2, () => {
           const pastDate = faker.date.past();
           const formattedPastDate = format(pastDate, 'yyyy-MM-dd');
@@ -44,6 +39,4 @@ Cypress.Commands.add('generateFixture', () => {
           }
         }),
       })
-    })
-  })
-})
+    });
