@@ -1,4 +1,8 @@
 {
-  "email": "joaoleitao@gmail.com",
-  "senha": "12345"
+  "usuario": [
+    {
+      "email": "joaoleitao@gmail.com",
+      "senha": "12345"
+    }
+  ]
 }
