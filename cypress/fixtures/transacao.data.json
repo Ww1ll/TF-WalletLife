@@ -1,16 +1,18 @@
 {
-  "despesa": [
+  "investimento": [
     {
-      "tipo": "2",
-      "valor": "450",
-      "descricao": "Lustroso",
-      "data": "1946-12-17"
+      "tipo": "1",
+      "valor": "862",
+      "descricao": "Pequeno",
+      "corretora": "Beleza",
+      "data": "1936-04-22"
     },
     {
-      "tipo": "2",
-      "valor": "390",
-      "descricao": "Pequeno",
-      "data": "1992-06-19"
+      "tipo": "1",
+      "valor": "667",
+      "descricao": "Inteligente",
+      "corretora": "Jogos",
+      "data": "1973-11-30"
     }
   ]
 }

@@ -24,3 +24,32 @@ Cypress.Commands.add('cadastrarDespesa', (tipo, valor, descricao, data) => {
     cy.get('[type="date"]').type(data)
     cy.get('.sc-jSwlEQ').click()
 })
+
+Cypress.Commands.add('excluirDespesa', (tipo, valor, descricao, data) => {
+    cy.cadastrarDespesa(tipo, valor, descricao, data)
+        cy.get('.sc-grXZZQ').click()
+        cy.get('.sc-cwKisF').type(valor - 1)
+        cy.get('.sc-lltjXc').click()
+        cy.get(':nth-child(1) > .sc-iJfdHH > .sc-kMbQoj').click()
+        cy.get('.sc-ilpitK > :nth-child(1) > .sc-bcPKhP').should('contain', 'DELETAR TRANSAÇÃO?')
+        cy.get('.btn-delete').click()
+})
+
+Cypress.Commands.add('cadastrarInvestimento', (tipo, valor, descricao, corretora, data) => {
+    cy.get('#tipoInvestimento').select('Renda fixa')
+    cy.get('#valor').type(valor)
+    cy.get('#descricao').type(descricao)
+    cy.get('#corretora').type(corretora)
+    cy.get('#data').type(data)
+    cy.get('.sc-jSwlEQ').click()
+})
+
+Cypress.Commands.add('excluirInvestimento', (tipo, valor, descricao, corretora, data) => {
+    cy.cadastrarInvestimento(tipo, valor, descricao, corretora, data)
+        cy.get('.sc-grXZZQ').click()
+        cy.get('.sc-cwKisF').type(corretora)
+        cy.get('.sc-lltjXc').click()
+        cy.get(':nth-child(1) > .sc-iJfdHH > .sc-kMbQoj').click()
+        cy.get('.sc-ilpitK > :nth-child(1) > .sc-bcPKhP').should('contain', 'DELETAR TRANSAÇÃO?')
+        cy.get('.btn-delete').click()
+})

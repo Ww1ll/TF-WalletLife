@@ -7,12 +7,42 @@ describe('Dashboard - Investimentos', () => {
         cy.generateFixture();
     })
 
-    it('CT036 - Validar botão "+" com sucesso', () => {
+    it('CT036 - Validar adicionar investimento com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.criarUsuarioELogarNoSistema(data.usuario[0].nomeCompleto, data.usuario[0].email, data.usuario[0].dataNascimento, data.usuario[0].cpf, data.usuario[0].senha)
-            cy.get('#root > div > header > div.navegacao > a:nth-child(4)').click()
-            cy.get('.sc-fLBbxL').click()
-            cy.get('#root > div > div > div > div > h3').contains('ADICIONAR TRANSAÇÃO')
+            cy.get('[href="/investimentos"] > span').click()
+            cy.get('.sc-bBbNsw').click()
+        })
+
+        cy.fixture('transacao.data.json').then(data => {
+            cy.cadastrarInvestimento(data.investimento[0].tipo, data.investimento[0].valor, data.investimento[0].descricao, data.investimento[0].corretora, data.investimento[0].data)
+            cy.get('.Toastify__toast-body > :nth-child(2)').should('contain', 'Investimento adicionado com sucesso!')
+        })
+    })
+
+    it('CT037 - Validar campo buscar um investimento com sucesso', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.visit("/login")
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.get('.navegacao > [href="/investimentos"]').click()            
+        })
+        cy.fixture('transacao.data.json').then(data => {
+            cy.get('.sc-cwKisF').type(data.investimento[0].corretora)
+            cy.get('.sc-lltjXc').click()
+            cy.get('.sc-ezGUZh').should('contain', data.investimento[0].descricao)
+        })
+    })
+
+    it('CT039 - Validar excluir um investimento com sucesso', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.visit("/login")
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.get('.navegacao > [href="/investimentos"]').click()
+            cy.get('.sc-bBbNsw').click()          
+        })
+        cy.fixture('transacao.data.json').then(data => {
+            cy.excluirInvestimento(data.investimento[1].tipo, data.investimento[1].valor, data.investimento[1].descricao, data.investimento[1].corretora, data.investimento[1].data)
+            cy.get('.sc-ezGUZh').should('not.contain', data.investimento[1].descricao)
         })
     })
 
