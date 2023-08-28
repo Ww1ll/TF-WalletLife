@@ -42,7 +42,7 @@ describe('Dashboard - Investimentos', () => {
         })
         cy.fixture('transacao.data.json').then(data => {
             cy.excluirInvestimento(data.investimento[1].tipo, data.investimento[1].valor, data.investimento[1].descricao, data.investimento[1].corretora, data.investimento[1].data)
-            cy.get('.sc-ezGUZh').should('not.contain', data.investimento[1].descricao)
+            cy.get('#\\32  > .Toastify__toast-body > :nth-child(2)').should('contain', 'Transação excluída com sucesso!')
         })
     })
 
