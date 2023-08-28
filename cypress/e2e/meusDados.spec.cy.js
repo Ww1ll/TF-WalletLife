@@ -88,4 +88,13 @@ describe('Tela Meus dados', () => {
       cy.get('.logout > span').click()
       cy.url().should('eq', 'https://wallet-life.vercel.app/')
     })
+
+    it('CT060 - Validar botão meus dados com sucesso', () => {
+      cy.fixture('usuario.data.json').then(data => {
+        cy.visit("/login")
+        cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+      })
+      cy.get('[data-testid="meus-dados"]').click()
+      cy.get(':nth-child(1) > .sc-bcPKhP').contains('DADOS')
+    })
 })
