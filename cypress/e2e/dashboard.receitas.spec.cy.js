@@ -7,16 +7,45 @@ describe('Dashboard Receitas', () => {
         cy.generateFixture();
     })
 
-    it('CT028 - Validar botão "+" com sucesso', () => {
+    it.only('CT028 - Validar adicionar receita com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.criarUsuarioELogarNoSistema(data.usuario[0].nomeCompleto, data.usuario[0].email, data.usuario[0].dataNascimento, data.usuario[0].cpf, data.usuario[0].senha)
             cy.get('.navegacao > [href="/receitas"]').click()
-            cy.get('.sc-fLBbxL').click()
-            cy.get('#root > div > div > div > div > h3').contains('ADICIONAR TRANSAÇÃO')
+            cy.get('.sc-bBbNsw').click()
+        })
+
+        cy.fixture('transacao.data.json').then(data => {
+            cy.cadastrarReceita(data.receita[0].valor, data.receita[0].descricao, data.receita[0].empresa, data.receita[0].banco)
+            cy.get('.Toastify__toast-body > :nth-child(2)').should('contain', 'Receita adicionada com sucesso!')
         })
     })
 
+    it('CT029 - Validar campo buscar uma receita com sucesso', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.visit("/login")
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.get('.navegacao > [href="/receitas"]').click()            
+        })
+        cy.fixture('transacao.data.json').then(data => {
+            cy.get('.sc-cwKisF').type(data.receita[0].valor - 1)
+            cy.get('.sc-lltjXc').click()
+            cy.get('.sc-ezGUZh').should('contain', data.receita[0].descricao)
+        })
+    })
     
+    it.only('CT031 - Validar excluir uma receita com sucesso', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.visit("/login")
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.get('.navegacao > [href="/receitas"]').click()
+            cy.get('.sc-bBbNsw').click()          
+        })
+        cy.fixture('transacao.data.json').then(data => {
+            cy.excluirReceita(data.receita[1].valor, data.receita[1].descricao, data.receita[1].empresa, data.receita[1].banco)
+            cy.get('.sc-ezGUZh').should('not.contain', data.receita[1].descricao)
+        })
+    })
+
     it('CT041.1 - Validar botão "Início" na tela Receitas com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.visit("/login")
@@ -47,6 +76,16 @@ describe('Dashboard Receitas', () => {
             cy.get('.sc-bcPKhP').contains('RECEITAS');        
             cy.get('a > img').click();
             cy.url().should('eq', 'https://wallet-life.vercel.app/')
+        })
+    })
+
+    it('CT057 - Validar botão "Meus dados" na tela Receitas com sucesso', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.visit("/login")
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.get('#root > div > header > div.navegacao > a:nth-child(3)').click()
+            cy.get('#root > div > header > div.navegacao > span').click()
+            cy.get('#root > div > header > div.sc-ksJisA.dlBcrG > div > div > h3').contains("VISUALIZAR DADOS")
         })
     })
 

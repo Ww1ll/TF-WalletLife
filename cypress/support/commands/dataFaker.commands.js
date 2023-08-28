@@ -29,6 +29,28 @@ Cypress.Commands.add('generateFixture', () => {
       }
     }),
   })
+
+  cy.writeFile('cypress/fixtures/transacao.data.json', {
+    'receita':Cypress._.times(2, () => {
+      return {
+        'valor': `${Math.floor(faker.finance.amount())}`,
+        'descricao': `${faker.commerce.productAdjective()}`,
+        'empresa': `${faker.commerce.department()}`,
+        'banco': `${faker.commerce.product()}`,
+      }
+    })
+  })
+
+  cy.writeFile('cypress/fixtures/transacao.data.json', {
+    'despesa':Cypress._.times(2, () => {
+      return {
+        'tipo': `${Math.floor(Math.random() * 2) + 1}`,
+        'valor': `${Math.floor(faker.finance.amount())}`,
+        'descricao': `${faker.commerce.productAdjective()}`,
+        'data': `${generateRandomBirthday()}`,
+      }
+    })
+  })
 })
 
 Cypress.Commands.add('generateFaleConoscoFixture', () => {

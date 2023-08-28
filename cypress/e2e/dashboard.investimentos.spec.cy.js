@@ -49,6 +49,16 @@ describe('Dashboard - Investimentos', () => {
         })
     })
 
+    it('CT054 - Validar botão "Meus dados" na tela Investimentos com sucesso', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.visit("/login")
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.get('#root > div > header > div.navegacao > a:nth-child(4) > span').click()
+            cy.get('#root > div > header > div.navegacao > span').click()
+            cy.get('#root > div > header > div.sc-ksJisA.dlBcrG > div > div > h3').contains("VISUALIZAR DADOS")
+        })
+    })
+
     it('CT055 - Validar botão "Sair" na tela Investimentos com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.visit("/login")
