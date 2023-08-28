@@ -16,4 +16,13 @@ describe('Dashboard - Meus Dados', () => {
             cy.get('#root > div > header > div.sc-ksJisA.dlBcrG > div > div > span:nth-child(1)').click();            
         })
     })
+
+    it('Validar botão "Meus dados" com sucesso', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.efetuarLogin("larissa@teste.com", "123321")
+            cy.get('#root > div > header > div.navegacao > a:nth-child(4) > span').click()
+            cy.get('#root > div > header > div.navegacao > span').click()
+            cy.get('#root > div > header > div.sc-ksJisA.dlBcrG > div > div > h3').contains("VISUALIZAR DADOS")
+        })
+    })
 })

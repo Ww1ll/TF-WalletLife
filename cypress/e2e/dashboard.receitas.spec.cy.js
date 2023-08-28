@@ -70,5 +70,5 @@ describe('Dashboard Receitas', () => {
             cy.get('[href="/despesas"] > span').click();
             cy.get('.sc-bcPKhP').contains('DESPESAS');    
         })
-    })   
+    })  
 })
