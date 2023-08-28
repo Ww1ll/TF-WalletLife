@@ -11,8 +11,8 @@ describe('Dashboard Despesas', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.criarUsuarioELogarNoSistema(data.usuario[0].nomeCompleto, data.usuario[0].email, data.usuario[0].dataNascimento, data.usuario[0].cpf, data.usuario[0].senha)
             cy.get('.navegacao > [href="/despesas"]').click()
-            cy.get('.sc-fLBbxL').click()
-            cy.get('#root > div > div > div > div > h3').contains('ADICIONAR TRANSAÇÃO')
+            cy.get('.sc-bBbNsw').click()
+            cy.get('.sc-cCIIiH > div > .sc-bcPKhP').contains('Criar Despesa')
         })
     })
 
