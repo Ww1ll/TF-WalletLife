@@ -1,26 +1,31 @@
+let campoNome = ':nth-child(2) > .input'
+let campoEmail = ':nth-child(3) > .input'
+let campoDescricao = '.textarea'
+let btnEnviarMensagem = ':nth-child(5) > .sc-jSwlEQ'
+
 Cypress.Commands.add('faleConosco', (nome, email, descricao) => {
-    cy.get(':nth-child(2) > .input').type(nome)
-    cy.get(':nth-child(3) > .input').type(email)
-    cy.get('.textarea').type(descricao)
-    cy.get(':nth-child(5) > .sc-jSwlEQ').click()
+    cy.get(campoNome).type(nome)
+    cy.get(campoEmail).type(email)
+    cy.get(campoDescricao).type(descricao)
+    cy.get(btnEnviarMensagem).click()
 })
 
 Cypress.Commands.add('faleConoscoSemNome', (email, descricao) => {
-  cy.get(':nth-child(3) > .input').type(email)
-  cy.get('.textarea').type(descricao)
-  cy.get(':nth-child(5) > .sc-jSwlEQ').click()
+  cy.get(campoEmail).type(email)
+  cy.get(campoDescricao).type(descricao)
+  cy.get(btnEnviarMensagem).click()
 })
 
 Cypress.Commands.add('faleConoscoSemEmail', (nome, descricao) => {
-  cy.get(':nth-child(2) > .input').type(nome)
-  cy.get('.textarea').type(descricao)
-  cy.get(':nth-child(5) > .sc-jSwlEQ').click()
+  cy.get(campoNome).type(nome)
+  cy.get(campoDescricao).type(descricao)
+  cy.get(btnEnviarMensagem).click()
 })
 
 Cypress.Commands.add('faleConoscoSemDescricao', (nome, email) => {
-  cy.get(':nth-child(2) > .input').type(nome)
-  cy.get(':nth-child(3) > .input').type(email)
-  cy.get(':nth-child(5) > .sc-jSwlEQ').click()
+  cy.get(campoNome).type(nome)
+  cy.get(campoEmail).type(email)
+  cy.get(btnEnviarMensagem).click()
 })
 
 Cypress.Commands.add('newsletter', (email) => {
