@@ -75,4 +75,13 @@ describe('Home Page', () => {
           cy.newsletter(data.usuario[0].email)
         })
     })
+
+    it('CT067 - Validar mudança do botão "Login" para "Sua área" com sucesso', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.criarUsuarioELogarNoSistema(data.usuario[0].nomeCompleto, data.usuario[0].email, data.usuario[0].dataNascimento, data.usuario[0].cpf, data.usuario[0].senha)
+            cy.get('.sc-bcPKhP').should('contain', 'Olá,')
+            cy.get('[data-testid="logo-link-home"]').click()
+            cy.get('.btns-div > [href="/login"] > .sc-jSwlEQ').should('contain', 'Sua área')
+        })
+    })
 })

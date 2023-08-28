@@ -77,6 +77,5 @@ Cypress.Commands.add('criarUsuarioELogarNoSistema', (nome, email, dataNascimento
   cy.visit("/cadastro")
   cy.cadastrarUsuario(nome, email, dataNascimento, cpf, senha)
   cy.get('.Toastify__toast-body > :nth-child(2)').should('contain', 'Usuário cadastrado com sucesso!')
-  cy.get('#email').clear()
   cy.efetuarLogin(email, senha)
 })
