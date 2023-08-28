@@ -1,0 +1,46 @@
+{
+  "receita": [
+    {
+      "valor": "540",
+      "descricao": "Feito à mão",
+      "empresa": "Mercearia",
+      "banco": "Bacon"
+    },
+    {
+      "valor": "70",
+      "descricao": "Lustroso",
+      "empresa": "Jogos",
+      "banco": "Salsicha"
+    }
+  ],
+  "despesa": [
+    {
+      "tipo": "2",
+      "valor": "735",
+      "descricao": "Feito à mão",
+      "data": "1979-05-08"
+    },
+    {
+      "tipo": "1",
+      "valor": "307",
+      "descricao": "Sem marca",
+      "data": "1932-08-17"
+    }
+  ],
+  "investimento": [
+    {
+      "tipo": "2",
+      "valor": "538",
+      "descricao": "Ergonômico",
+      "corretora": "Saúde",
+      "data": "1998-01-13"
+    },
+    {
+      "tipo": "1",
+      "valor": "687",
+      "descricao": "Incrível",
+      "corretora": "Jogos",
+      "data": "1919-07-01"
+    }
+  ]
+}

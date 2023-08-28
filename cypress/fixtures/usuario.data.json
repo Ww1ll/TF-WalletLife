@@ -1,4 +1,18 @@
 {
-  "email": "joaoleitao@gmail.com",
-  "senha": "12345"
+  "usuario": [
+    {
+      "email": "Raul.Costa@gmail.com",
+      "senha": "IJoq6jeHUrISAr8",
+      "nomeCompleto": "Eduardo Oliveira",
+      "dataNascimento": "1914-01-13",
+      "cpf": "43225467731"
+    },
+    {
+      "email": "Elisa85@hotmail.com",
+      "senha": "E7lOs0b_a21ZZNI",
+      "nomeCompleto": "Eduardo Moreira",
+      "dataNascimento": "1908-10-13",
+      "cpf": "86159892495"
+    }
+  ]
 }
