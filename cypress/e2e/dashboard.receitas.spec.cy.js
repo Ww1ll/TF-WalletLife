@@ -7,7 +7,7 @@ describe('Dashboard Receitas', () => {
         cy.generateFixture();
     })
 
-    it.only('CT028 - Validar adicionar receita com sucesso', () => {
+    it('CT028 - Validar adicionar receita com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.criarUsuarioELogarNoSistema(data.usuario[0].nomeCompleto, data.usuario[0].email, data.usuario[0].dataNascimento, data.usuario[0].cpf, data.usuario[0].senha)
             cy.get('.navegacao > [href="/receitas"]').click()
@@ -33,7 +33,7 @@ describe('Dashboard Receitas', () => {
         })
     })
     
-    it.only('CT031 - Validar excluir uma receita com sucesso', () => {
+    it('CT031 - Validar excluir uma receita com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.visit("/login")
             cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
