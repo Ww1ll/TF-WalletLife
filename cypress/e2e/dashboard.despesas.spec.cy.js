@@ -17,6 +17,7 @@ describe('Dashboard Despesas', () => {
         cy.fixture('transacao.data.json').then(data => {
             cy.cadastrarDespesa(data.despesa[0].tipo, data.despesa[0].valor, data.despesa[0].descricao, data.despesa[0].data)
             cy.get('.Toastify__toast-body > :nth-child(2)').should('contain', 'Despesa adicionada com sucesso!')
+
         })
     })
 
