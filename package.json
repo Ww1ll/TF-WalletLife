@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@shelex/cypress-allure-plugin": "^2.40.0",
+    "allure-commandline": "^2.23.1",
     "date-fns": "^2.30.0",
     "faker": "^5.5.3",
     "faker-br": "^0.4.1"
