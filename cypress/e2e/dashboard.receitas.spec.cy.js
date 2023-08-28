@@ -110,4 +110,23 @@ describe('Dashboard Receitas', () => {
             cy.get('.sc-bcPKhP').contains('DESPESAS');    
         })
     })   
+
+    it('CT066 - Validar cadastrar nova Receita com campo valor zerado', () => {
+
+        const numeroZerado = {
+            'valor': 0
+        }
+
+        cy.fixture('usuario.data.json').then(data => {
+            cy.visit("/login")
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.get('.navegacao > [href="/receitas"]').click() 
+            cy.get('.sc-bBbNsw').click() 
+        })
+        cy.fixture('transacao.data.json').then(data => {
+            cy.cadastrarReceita(numeroZerado.valor, data.receita[0].descricao, data.receita[0].empresa, data.receita[0].banco)
+            cy.get('.Toastify__toast-body > :nth-child(2)').should('contain', 'Receita inválida!')
+        })
+
+    })
 })
