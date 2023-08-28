@@ -10,6 +10,14 @@ module.exports = defineConfig({
     },
     "baseUrl":"https://wallet-life.vercel.app"
   },
+  env: {
+    allure: true,
+    allureResultsPath: "allure-results",
+    allureReuseAfterSpec: true,
+    allureAttachRequests: true,
+    allureClearSkippedTests: false,
+    allureAddVideoOnPass: false,
+  },
   chromeWebSecurity: false,
 });
 
