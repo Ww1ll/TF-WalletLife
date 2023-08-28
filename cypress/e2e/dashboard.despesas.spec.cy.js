@@ -43,7 +43,7 @@ describe('Dashboard Despesas', () => {
         })
         cy.fixture('transacao.data.json').then(data => {
             cy.excluirDespesa(data.despesa[1].tipo, data.despesa[1].valor, data.despesa[1].descricao, data.despesa[1].data)
-            cy.get('.sc-ezGUZh').should('not.contain', data.despesa[1].descricao)
+            cy.get('#\\32  > .Toastify__toast-body > :nth-child(2)').should('contain', 'Transação excluída com sucesso!')
         })
     })
 
