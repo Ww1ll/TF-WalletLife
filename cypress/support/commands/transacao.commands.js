@@ -23,7 +23,6 @@ let btnDeleteReceita = '.btn-delete'
 Cypress.Commands.add('excluirReceita', (valor, descricao, empresa, banco) => {
     cy.cadastrarReceita(valor, descricao, empresa, banco)
     cy.get(textConfirmacaoCadastroReceita).should('contain', 'Receita adicionada com sucesso!')
-    cy.get(btnFecharTelaCadastroReceita).click()
     cy.get(campoPesquisaReceita).type(valor - 1)
     cy.get(btnpesquisarReceita).click()
     cy.get(btnVisualizarReceita).click()
@@ -93,6 +92,14 @@ Cypress.Commands.add('excluirInvestimento', (tipo, valor, descricao, corretora, 
         cy.get(btnVisualizarInvestimento).click()
         cy.get(textConfirmacaoCadastroInvestimento).should('contain', 'DELETAR TRANSAÇÃO?')
         cy.get(btnDeleteInvestimento).click()
+})
+
+let btnNavegarTelaInicial = '[href="/sua-carteira"] > span'
+let textTelaInicial = '.sc-bcPKhP'
+
+Cypress.Commands.add('navegarParaTelaInicial', () => {    
+    cy.get(btnNavegarTelaInicial).click();  
+    cy.get(textTelaInicial).contains('Olá, ');  
 })
 
 let btnNavegarTelaDespesa = '.navegacao > [href="/despesas"]'
