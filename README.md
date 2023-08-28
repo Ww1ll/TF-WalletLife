@@ -1,6 +1,6 @@
 # Projeto de Testes Wallet Life
-Estes testes tem como objetivo realizar testes de automação front end utilizando o framework selenium.
-O objeto de teste foi o projeto DBCursos Tech realizado pela equipe de front-end durante a 12ª edição do Vem Ser DBC.
+Estes testes tem como objetivo realizar testes de automação front end utilizando a ferramenta Cypress.
+O objeto de teste foi o projeto Wallet Life realizado pela equipe de front-end durante a 12ª edição do Vem Ser DBC.
 
 ## Objetivo
 O objetivo deste projeto é automatizar os testes de interface de usuário do site Wallet Life utilizando a ferramenta de testes front end Cypress. Além disso, serão gerados relatórios detalhados utilizando o Allure.
