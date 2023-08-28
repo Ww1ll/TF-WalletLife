@@ -7,16 +7,46 @@ describe('Dashboard Despesas', () => {
         cy.generateFixture();
     })
 
-    it('CT032 - Validar botão "+" com sucesso', () => {
+    it('CT032 - Validar adicionar despesa com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.criarUsuarioELogarNoSistema(data.usuario[0].nomeCompleto, data.usuario[0].email, data.usuario[0].dataNascimento, data.usuario[0].cpf, data.usuario[0].senha)
             cy.get('.navegacao > [href="/despesas"]').click()
-            cy.get('.sc-fLBbxL').click()
-            cy.get('#root > div > div > div > div > h3').contains('ADICIONAR TRANSAÇÃO')
+            cy.get('.sc-bBbNsw').click()
+        })
+
+        cy.fixture('transacao.data.json').then(data => {
+            cy.cadastrarDespesa(data.despesa[0].tipo, data.despesa[0].valor, data.despesa[0].descricao, data.despesa[0].data)
+            cy.get('.sc-grXZZQ').click()
+            cy.get('.sc-ezGUZh').should('contain', data.despesa[0].descricao)
         })
     })
 
-    
+    it('CT033 - Validar campo buscar uma despesa com sucesso', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.visit("/login")
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.get('.navegacao > [href="/despesas"]').click()            
+        })
+        cy.fixture('transacao.data.json').then(data => {
+            cy.get('.sc-cwKisF').type(data.despesa[0].valor - 1)
+            cy.get('.sc-lltjXc').click()
+            cy.get('.sc-ezGUZh').should('contain', data.despesa[0].descricao)
+        })
+    })
+
+    it('CT035 - Validar excluir uma despesa com sucesso', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.visit("/login")
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.get('.navegacao > [href="/despesas"]').click()
+            cy.get('.sc-bBbNsw').click()          
+        })
+        cy.fixture('transacao.data.json').then(data => {
+            cy.excluirDespesa(data.despesa[1].tipo, data.despesa[1].valor, data.despesa[1].descricao, data.despesa[1].data)
+            cy.get('.sc-ezGUZh').should('not.contain', data.despesa[1].descricao)
+        })
+    })
+
     it('CT045 - Validar botão "Início" na tela Despesas com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.visit("/login")
@@ -50,6 +80,17 @@ describe('Dashboard Despesas', () => {
         })
     })
 
+    it('CT048 - Validar botão "Meus dados" com sucesso', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.visit("/login")
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.get('.navegacao > [href="/despesas"]').click();  
+            cy.get('.sc-bcPKhP').contains('DESPESAS');        
+            cy.get('#root > div > header > div.navegacao > span').click();
+            cy.get("#root > div > header > div.sc-ksJisA.dlBcrG > div > form > div > button:nth-child(1)").should("exist");
+        })
+    })
+
     it('CT049 - Validar botão Logo na tela Despesas com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.visit("/login")
@@ -61,8 +102,6 @@ describe('Dashboard Despesas', () => {
         })
     })
 
-    
-
     it('CT050 - Validar botão "Sair" na tela Despesas com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.visit("/login")
@@ -73,16 +112,4 @@ describe('Dashboard Despesas', () => {
             cy.url().should('eq', 'https://wallet-life.vercel.app/')
         })
     })
-
-    it('CT048 - Validar botão "Meus dados" com sucesso', () => {
-        cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
-            cy.get('.navegacao > [href="/despesas"]').click();  
-            cy.get('.sc-bcPKhP').contains('DESPESAS');        
-            cy.get('#root > div > header > div.navegacao > span').click();
-            cy.get("#root > div > header > div.sc-ksJisA.dlBcrG > div > form > div > button:nth-child(1)").should("exist");
-        })
-    })
-    
 })

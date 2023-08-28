@@ -44,6 +44,15 @@ describe('Dashboard Usuário', () => {
       })
     })
 
+    it('CT022 - Validar Meus Dados com sucesso', () => {
+      cy.fixture('usuario.data.json').then(data => {
+        cy.visit("/login")
+        cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+        cy.get('span.navlink').click()
+        cy.get(':nth-child(1) > .sc-bcPKhP').should('contain', 'VISUALIZAR DADOS')
+      })
+    })
+
     it('CT023 - Validar botão suas receitas com sucesso', () => {
       cy.fixture('usuario.data.json').then(data => {
         cy.visit("/login")
