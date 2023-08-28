@@ -7,7 +7,7 @@ describe('Dashboard Receitas', () => {
         cy.generateFixture();
     })
 
-    it('CT028 - Validar adicionar receita com sucesso', () => {
+    it.only('CT028 - Validar adicionar receita com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.criarUsuarioELogarNoSistema(data.usuario[0].nomeCompleto, data.usuario[0].email, data.usuario[0].dataNascimento, data.usuario[0].cpf, data.usuario[0].senha)
             cy.get('.navegacao > [href="/receitas"]').click()
@@ -22,7 +22,6 @@ describe('Dashboard Receitas', () => {
 
     it('CT029 - Validar campo buscar uma receita com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
             cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
             cy.get('.navegacao > [href="/receitas"]').click()            
         })
@@ -35,7 +34,6 @@ describe('Dashboard Receitas', () => {
     
     it('CT031 - Validar excluir uma receita com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
             cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
             cy.get('.navegacao > [href="/receitas"]').click()
             cy.get('.sc-bBbNsw').click()          
@@ -48,7 +46,6 @@ describe('Dashboard Receitas', () => {
 
     it('CT041.1 - Validar botão "Início" na tela Receitas com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
             cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
             cy.get('.navegacao > [href="/receitas"]').click();  
             cy.get('.sc-bcPKhP').contains('RECEITAS');        
@@ -59,10 +56,9 @@ describe('Dashboard Receitas', () => {
 
     it('CT041.2 - Validar botão "Investimentos" na tela Receitas com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
             cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
             cy.get('.navegacao > [href="/receitas"]').click();  
-            cy.get('.sc-bcPKhP').contains('RECEITAS');        
+            cy.get('.sc-bcPKhP').contains('RECEITAS');
             cy.get('[href="/investimentos"] > span').click();
             cy.get('.sc-bcPKhP').contains('INVESTIMENTOS');    
         })
@@ -70,7 +66,6 @@ describe('Dashboard Receitas', () => {
 
     it('CT044 - Validar botão Logo na tela Receitas com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
             cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
             cy.get('.navegacao > [href="/receitas"]').click();  
             cy.get('.sc-bcPKhP').contains('RECEITAS');        
@@ -81,7 +76,6 @@ describe('Dashboard Receitas', () => {
 
     it('CT057 - Validar botão "Meus dados" na tela Receitas com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
             cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
             cy.get('#root > div > header > div.navegacao > a:nth-child(3)').click()
             cy.get('#root > div > header > div.navegacao > span').click()
@@ -91,7 +85,6 @@ describe('Dashboard Receitas', () => {
 
     it('CT058 - Validar botão "Sair" na tela Receitas com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
             cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
             cy.get('.navegacao > [href="/receitas"]').click();  
             cy.get('.sc-bcPKhP').contains('RECEITAS');        
@@ -102,7 +95,6 @@ describe('Dashboard Receitas', () => {
 
     it('CT059 - Validar botão "Despesas" na tela Receitas com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
             cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
             cy.get('.navegacao > [href="/receitas"]').click();  
             cy.get('.sc-bcPKhP').contains('RECEITAS');        
@@ -118,7 +110,6 @@ describe('Dashboard Receitas', () => {
         }
 
         cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
             cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
             cy.get('.navegacao > [href="/receitas"]').click() 
             cy.get('.sc-bBbNsw').click() 
@@ -127,6 +118,19 @@ describe('Dashboard Receitas', () => {
             cy.cadastrarReceita(numeroZerado.valor, data.receita[0].descricao, data.receita[0].empresa, data.receita[0].banco)
             cy.get('.Toastify__toast-body > :nth-child(2)').should('contain', 'Receita inválida!')
         })
+    })
 
+    it.only('CT068 - Validar Cadastrar despesa com valor negativo', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.get('.navegacao > [href="/receitas"]').click() 
+            cy.get('.sc-bBbNsw').click() 
+        })
+
+        cy.fixture('transacao.data.json').then(data => {
+            cy.cadastrarReceita(-10, data.receita[0].descricao, data.receita[0].empresa, data.receita[0].banco)
+            cy.get('.sc-hhWzdI > div > .sc-bcPKhP').should('contain', 'ADICIONAR TRANSAÇÃO')
+            cy.get('#\\31  > div.Toastify__toast-body > div:nth-child(2)').contains('Receita inválida!')
+        })
     })
 })
