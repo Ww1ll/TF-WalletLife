@@ -23,11 +23,11 @@ describe('Home Page', () => {
             cy.get('.sc-bcPKhP').contains('LOGIN')
     })
     
-    it('CT004 - Validar botão "entrar na plataforma(1)!" com sucesso', () => {
+    it('CT004.1 - Validar botão "entrar na plataforma(1)!" com sucesso', () => {
         cy.clicarEntrarNaPlataforma1();
     })
 
-    it('CT004 - Validar botão "entrar na plataforma(2)!" com sucesso', () => {
+    it('CT004.2 - Validar botão "entrar na plataforma(2)!" com sucesso', () => {
         cy.clicarEntrarNaPlataforma2();
     })
 
