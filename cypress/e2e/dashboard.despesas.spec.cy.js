@@ -7,12 +7,16 @@ describe('Dashboard Despesas', () => {
         cy.generateFixture();
     })
 
-    it('CT032 - Validar botão "+" com sucesso', () => {
+    it.only('CT032 - Validar adicionar despesa com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.criarUsuarioELogarNoSistema(data.usuario[0].nomeCompleto, data.usuario[0].email, data.usuario[0].dataNascimento, data.usuario[0].cpf, data.usuario[0].senha)
             cy.get('.navegacao > [href="/despesas"]').click()
-            cy.get('.sc-fLBbxL').click()
-            cy.get('#root > div > div > div > div > h3').contains('ADICIONAR TRANSAÇÃO')
+            cy.get('.sc-bBbNsw').click()
+        })
+
+        cy.fixture('transacao.data.json').then(data => {
+            cy.cadastrarDespesa(data.despesa[0].tipo, data.despesa[0].valor, data.despesa[0].descricao, data.despesa[0].data)
+            cy.get('.Toastify__toast-body > :nth-child(2)').should('contain', 'Despesa adicionada com sucesso!')
         })
     })
 
@@ -50,6 +54,17 @@ describe('Dashboard Despesas', () => {
         })
     })
 
+    it('CT048 - Validar botão "Meus dados" com sucesso', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.visit("/login")
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.get('.navegacao > [href="/despesas"]').click();  
+            cy.get('.sc-bcPKhP').contains('DESPESAS');        
+            cy.get('#root > div > header > div.navegacao > span').click();
+            cy.get("#root > div > header > div.sc-ksJisA.dlBcrG > div > form > div > button:nth-child(1)").should("exist");
+        })
+    })
+
     it('CT049 - Validar botão Logo na tela Despesas com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.visit("/login")
@@ -61,8 +76,6 @@ describe('Dashboard Despesas', () => {
         })
     })
 
-    
-
     it('CT050 - Validar botão "Sair" na tela Despesas com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.visit("/login")
@@ -73,16 +86,4 @@ describe('Dashboard Despesas', () => {
             cy.url().should('eq', 'https://wallet-life.vercel.app/')
         })
     })
-
-    it('CT048 - Validar botão "Meus dados" com sucesso', () => {
-        cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
-            cy.get('.navegacao > [href="/despesas"]').click();  
-            cy.get('.sc-bcPKhP').contains('DESPESAS');        
-            cy.get('#root > div > header > div.navegacao > span').click();
-            cy.get("#root > div > header > div.sc-ksJisA.dlBcrG > div > form > div > button:nth-child(1)").should("exist");
-        })
-    })
-    
 })
