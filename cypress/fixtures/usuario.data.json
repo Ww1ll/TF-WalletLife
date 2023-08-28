@@ -1,6 +1,7 @@
 {
   "usuario": [
     {
+<<<<<<< HEAD
       "email": "Joaquim.Barros19@hotmail.com",
       "senha": "zxrbC5d326HdyPB",
       "nomeCompleto": "Vicente Albuquerque",
@@ -13,6 +14,20 @@
       "nomeCompleto": "Lavínia Oliveira",
       "dataNascimento": "1973-06-12",
       "cpf": "58167859908"
+=======
+      "email": "Guilherme.Silva@yahoo.com",
+      "senha": "Q25eXuC11lywcmF",
+      "nomeCompleto": "Karla Macedo",
+      "dataNascimento": "1976-06-09",
+      "cpf": "73788232013"
+    },
+    {
+      "email": "Yasmin0@live.com",
+      "senha": "woz_Io7ISv07_Tz",
+      "nomeCompleto": "Maria Reis",
+      "dataNascimento": "1910-05-12",
+      "cpf": "63278465210"
+>>>>>>> d26eb53b28d389d8ad0cbe23880d058baf09e2fc
     }
   ]
 }

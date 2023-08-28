@@ -38,10 +38,7 @@ Cypress.Commands.add('generateFixture', () => {
         'empresa': `${faker.commerce.department()}`,
         'banco': `${faker.commerce.product()}`,
       }
-    })
-  })
-
-  cy.writeFile('cypress/fixtures/transacao.data.json', {
+    }),
     'despesa':Cypress._.times(2, () => {
       return {
         'tipo': `${Math.floor(Math.random() * 2) + 1}`,
@@ -49,10 +46,7 @@ Cypress.Commands.add('generateFixture', () => {
         'descricao': `${faker.commerce.productAdjective()}`,
         'data': `${generateRandomBirthday()}`,
       }
-    })
-  })
-
-  cy.writeFile('cypress/fixtures/transacao.data.json', {
+    }),
     'investimento':Cypress._.times(2, () => {
       return {
         'tipo': `${Math.floor(Math.random() * 2) + 1}`,
@@ -83,6 +77,5 @@ Cypress.Commands.add('criarUsuarioELogarNoSistema', (nome, email, dataNascimento
   cy.visit("/cadastro")
   cy.cadastrarUsuario(nome, email, dataNascimento, cpf, senha)
   cy.get('.Toastify__toast-body > :nth-child(2)').should('contain', 'Usuário cadastrado com sucesso!')
-  cy.get('#email').clear()
   cy.efetuarLogin(email, senha)
 })

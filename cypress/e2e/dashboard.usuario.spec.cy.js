@@ -84,8 +84,9 @@ describe('Dashboard Usuário', () => {
       cy.fixture('usuario.data.json').then(data => {
         cy.visit("/login")
         cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+        cy.get('.sc-bcPKhP').should('contain', 'Olá,')
       })
-      cy.get('img').click()
+      cy.get('[data-testid="logo-link-home"]').click()
       cy.url().should('eq', 'https://wallet-life.vercel.app/')
     })
 
