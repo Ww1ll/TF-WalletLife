@@ -74,5 +74,15 @@ describe('Dashboard Despesas', () => {
         })
     })
 
+    it('CT048 - Validar botão "Meus dados" com sucesso', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.visit("/login")
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.get('.navegacao > [href="/despesas"]').click();  
+            cy.get('.sc-bcPKhP').contains('DESPESAS');        
+            cy.get('#root > div > header > div.navegacao > span').click();
+            cy.get("#root > div > header > div.sc-ksJisA.dlBcrG > div > form > div > button:nth-child(1)").should("exist");
+        })
+    })
     
 })
