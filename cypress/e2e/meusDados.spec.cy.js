@@ -1,6 +1,6 @@
 /// <reference types="cypress"/>
 
-describe('Dashboard Usuário', () => {
+describe('Tela Meus dados', () => {
 
     beforeEach(() => {
         cy.visit("/")
