@@ -11,6 +11,13 @@ Cypress.Commands.add('efetuarLogin', (email, senha, msg) => {
     cy.get(btnLogar).click()
     cy.get(textTela).should('contain', msg)
 })
+Cypress.Commands.add('efetuarLoginSemMensagem', (email, senha) => {
+    cy.visit("/login")
+    cy.get(campoEmail).clear()
+    cy.get(campoEmail).type(email)
+    cy.get(campoSenha).type(senha)
+    cy.get(btnLogar).click()
+})
 Cypress.Commands.add('loginSemEmail', (senha) => {
     cy.get(campoSenha).type(senha)
     cy.get(btnLogar).click()

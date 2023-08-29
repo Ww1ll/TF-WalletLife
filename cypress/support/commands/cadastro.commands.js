@@ -61,3 +61,7 @@ Cypress.Commands.add('clicarBotaoLoginTelaCadastro', () => {
 Cypress.Commands.add('clicarBotaoLogoTelaCadastro', () => {
     cy.get('#root > main > div.header > a').click()
 })
+
+Cypress.Commands.add('clicarBotaoRegistrar', () => {
+    cy.get('#header > div > a:nth-child(1) > button').click()
+})
