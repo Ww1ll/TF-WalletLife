@@ -26,6 +26,16 @@ describe('Tela Meus dados', () => {
       cy.navegarParaTelaMeusDados()
     })
 
+    it('CT069 - Validando atualização de nome, email e senha com sucesso', () => {
+      cy.fixture('usuario.data.json').then(data => {
+          cy.clicarBotaoRegistrar()
+          cy.cadastrarUsuario(data.usuario[0].nomeCompleto, data.usuario[0].email, data.usuario[0].dataNascimento, data.usuario[0].cpf, data.usuario[0].senha)
+          cy.wait(3000)
+          cy.efetuarLoginSemMensagem(data.usuario[0].email, data.usuario[0].senha)
+          cy.navegarParaTelaMeusDadosEEditar(data.usuario[1].nomeCompleto, data.usuario[1].email, data.usuario[1].senha)
+      })
+  })
+
     it('CT071 - Validar excluir conta de usuário com sucesso', () => {
       cy.fixture('usuario.data.json').then(data => {
         cy.visit("/login")
@@ -35,5 +45,17 @@ describe('Tela Meus dados', () => {
         cy.get('#root > div > header > div.sc-ksJisA.dlBcrG > div.sc-fnOeiS.kuXGUC > div > div > button.sc-jSwlEQ.dNgWca.btn-delete').click()
         cy.url().should('eq', 'https://wallet-life.vercel.app/')
       })
+  })
+
+  it('CT072 - Validar botão cancelar de deletar conta', () => {
+    cy.fixture('usuario.data.json').then(data => {
+        cy.clicarBotaoRegistrar()
+        cy.cadastrarUsuario(data.usuario[0].nomeCompleto, data.usuario[0].email, data.usuario[0].dataNascimento, data.usuario[0].cpf, data.usuario[0].senha)
+        cy.wait(3000)
+        cy.efetuarLoginSemMensagem(data.usuario[0].email, data.usuario[0].senha)
+
+        cy.navegarParaTelaMeusDados()
+        cy.navegarParaDeletarContaECancelar()
+    })
   })
 })

@@ -5,7 +5,7 @@ let campoDataDespesa = '[type="date"]'
 let btnCadastrarDespesa = '.sc-jSwlEQ'
 
 Cypress.Commands.add('cadastrarDespesa', (tipo, valor, descricao, data) => {
-    cy.get('#root > div > section > div.sc-hHvkSs.eqZTeR > div > button').click()
+    //cy.get('#root > div > section > div.sc-hHvkSs.eqZTeR > div > button').click()
     cy.get(campoSelectTipoDespesa).select(tipo)
     cy.get(campoValorDespesa).type(valor)
     cy.get(campoDescricaoDespesa).type(descricao)
@@ -30,7 +30,7 @@ Cypress.Commands.add('excluirDespesa', (tipo, valor, descricao, data) => {
         cy.get(btnDeleteDespesa).click()
 })
 
-let btnOlho = "#root > div > section > div.itens-paginacao > ul > li > div > button.sc-bYUneI.kqWAb"
+let btnOlho = ':nth-child(1) > .sc-iJfdHH > [data-testid="logo-link-home"]'
 let descricao = "#root > div > section > div.itens-paginacao > ul > li > div > p.sc-ezGUZh.OYKMh"
 
 Cypress.Commands.add('editarDespesa', (tipo, valor, desc, data) => {

@@ -1,46 +1,46 @@
 {
   "receita": [
     {
-      "valor": "138",
-      "descricao": "Refinado",
-      "empresa": "Música",
-      "banco": "Camiseta"
+      "valor": "625",
+      "descricao": "Inteligente",
+      "empresa": "Beleza",
+      "banco": "Peixe"
     },
     {
-      "valor": "201",
-      "descricao": "Sem marca",
-      "empresa": "Filmes",
-      "banco": "Calças"
+      "valor": "163",
+      "descricao": "Prático",
+      "empresa": "Computadores",
+      "banco": "Luvas"
     }
   ],
   "despesa": [
     {
-      "tipo": "2",
-      "valor": "441",
-      "descricao": "Licenciado",
-      "data": "1942-05-05"
+      "tipo": "Recorrente",
+      "valor": "461",
+      "descricao": "Sem marca",
+      "data": "1984-03-01"
     },
     {
-      "tipo": "1",
-      "valor": "6",
-      "descricao": "Rústico",
-      "data": "1911-02-13"
+      "tipo": "Recorrente",
+      "valor": "900",
+      "descricao": "Licenciado",
+      "data": "1954-09-17"
     }
   ],
   "investimento": [
     {
-      "tipo": "2",
-      "valor": "616",
-      "descricao": "Licenciado",
-      "corretora": "Mercearia",
-      "data": "1931-07-06"
+      "tipo": "Renda fixa",
+      "valor": "431",
+      "descricao": "Genérico",
+      "corretora": "Bebê",
+      "data": "1986-05-04"
     },
     {
-      "tipo": "1",
-      "valor": "933",
-      "descricao": "Prático",
-      "corretora": "Beleza",
-      "data": "1949-06-09"
+      "tipo": "Renda variável",
+      "valor": "89",
+      "descricao": "Gostoso",
+      "corretora": "Crianças",
+      "data": "1939-02-01"
     }
   ]
 }
