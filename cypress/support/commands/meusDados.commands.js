@@ -6,7 +6,7 @@ let inputNome = "#nome"
 let inputEmail = "#email"
 let inputSenha = "#senha"
 let btnConcluir = "#root > div > header > div.sc-ksJisA.dlBcrG > div.sc-hBpgZr.iORPSN > form > div > button:nth-child(1)"
-let avisoDeEditado = "#\\31 "
+let avisoDeEditado = "#\\32  > div.Toastify__toast-body"
 
 Cypress.Commands.add('navegarParaTelaMeusDados', () => {    
     cy.get(btnNavegarMeusDados).click();  
@@ -26,3 +26,13 @@ Cypress.Commands.add('navegarParaTelaMeusDadosEEditar', (nome, email, senha) => 
     })
 })
 
+
+let btnDeletarConta = "#root > div > header > div.sc-ksJisA.dlBcrG > div.sc-hBpgZr.iORPSN > form > div > button.delete" 
+let btnCancelar = "#root > div > header > div.sc-ksJisA.dlBcrG > div.sc-fnOeiS.kuXGUC > div > div > button:nth-child(1)"
+let cabecalho = "#root > div > header > div.sc-ksJisA.dlBcrG > div.sc-hBpgZr.iORPSN > div > h3"
+
+Cypress.Commands.add('navegarParaDeletarContaECancelar', () => {    
+    cy.get(btnDeletarConta).click();
+    cy.get(btnCancelar).click()
+    cy.get(cabecalho).contains("VISUALIZAR DADOS")
+})
