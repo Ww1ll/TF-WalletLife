@@ -5,7 +5,8 @@ let campoDataDespesa = '[type="date"]'
 let btnCadastrarDespesa = '.sc-jSwlEQ'
 
 Cypress.Commands.add('cadastrarDespesa', (tipo, valor, descricao, data) => {
-    cy.get(campoSelectTipoDespesa).select('Única')
+    cy.get('#root > div > section > div.sc-hHvkSs.eqZTeR > div > button').click()
+    cy.get(campoSelectTipoDespesa).select(tipo)
     cy.get(campoValorDespesa).type(valor)
     cy.get(campoDescricaoDespesa).type(descricao)
     cy.get(campoDataDespesa).type(data)
@@ -27,4 +28,19 @@ Cypress.Commands.add('excluirDespesa', (tipo, valor, descricao, data) => {
         cy.get(btnVisualizarDespesa).click()
         cy.get(textTelaConfirmacaoDeletarDespesa).should('contain', 'DELETAR TRANSAÇÃO?')
         cy.get(btnDeleteDespesa).click()
+})
+
+let btnOlho = "#root > div > section > div.itens-paginacao > ul > li > div > button.sc-bYUneI.kqWAb"
+let descricao = "#root > div > section > div.itens-paginacao > ul > li > div > p.sc-ezGUZh.OYKMh"
+
+Cypress.Commands.add('editarDespesa', (tipo, valor, desc, data) => {
+    cy.get(btnOlho).click()
+    cy.get(campoValorDespesa).clear()
+    cy.get(campoDescricaoDespesa).clear()
+    cy.get(campoSelectTipoDespesa).select(tipo)
+    cy.get(campoValorDespesa).type(valor)
+    cy.get(campoDescricaoDespesa).type(desc)
+    cy.get(campoDataDespesa).type(data)
+    cy.get(btnCadastrarDespesa).click()
+    cy.get(descricao).contains(desc)
 })
