@@ -114,4 +114,15 @@ describe('Dashboard Despesas', () => {
             cy.url().should('eq', 'https://wallet-life.vercel.app/')
         })
     })
+
+    it('CT076 - Validando a atualização de despesa com valor negativo', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.navegarParaTelaDeDespesa()      
+            cy.get('#root > div > section > div.itens-paginacao > ul > li > div > button.sc-bYUneI.kqWAb').click();
+            cy.get('#root > div.sc-gXCJSa.WkYuL > div > form > input[type=number]:nth-child(2)').clear().type('-1')
+            cy.get('#root > div.sc-gXCJSa.WkYuL > div > form > button').click();
+            cy.get("#root > div.sc-bjEwCx.euqxmz > section > div.Toastify > div").should('exist')
+        })
+    })
 })
