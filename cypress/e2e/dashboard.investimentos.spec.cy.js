@@ -113,4 +113,15 @@ describe('Dashboard - Investimentos', () => {
             cy.url().should('eq', 'https://wallet-life.vercel.app/')
         })
     })
+
+    it('CT078 - cenário negativo de atualização de investimento', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.navegarParaTelaDeInvestimento()      
+            cy.get('#root > div > section > div.itens-paginacao > ul > li:nth-child(1) > div > button.sc-bYUneI.kqWAb').click();
+            cy.get('#valor').clear().type('-1')
+            cy.get('#root > div.sc-ciJnBw.fhBEBW > div.sc-jdkVqZ.bANMmo > form > button').click();
+            cy.get("#root > div.sc-bjEwCx.euqxmz > section > div.Toastify > div").should('exist')
+        })
+    })
 })
