@@ -1,5 +1,5 @@
 # Projeto de Testes Wallet Life
-Estes testes tem como objetivo realizar testes de automação front end utilizando a ferramenta Cypress.
+Este projeto tem como objetivo realizar testes de automação front end utilizando a ferramenta Cypress.
 O objeto de teste foi o projeto Wallet Life realizado pela equipe de front-end durante a 12ª edição do Vem Ser DBC.
 
 ## Objetivo
