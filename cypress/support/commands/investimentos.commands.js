@@ -4,9 +4,11 @@ let campoDescricaoInvestimento = '#descricao'
 let campoCorretoraInvestimento = '#corretora'
 let campoDataInvestimento = '#data'
 let btnCadastrarInvestimento = '.sc-jSwlEQ'
+let btnEditarInvestimento = "#root > div > section > div.sc-hHvkSs.fcurvz > div > button"
 
 Cypress.Commands.add('cadastrarInvestimento', (tipo, valor, descricao, corretora, data) => {
-    cy.get(campoTipoInvestimento).select('Renda fixa')
+    cy.get(btnEditarInvestimento).click()
+    cy.get(campoTipoInvestimento).select(tipo)
     cy.get(campoValorInvestimento).type(valor)
     cy.get(campoDescricaoInvestimento).type(descricao)
     cy.get(campoCorretoraInvestimento).type(corretora)
@@ -29,4 +31,21 @@ Cypress.Commands.add('excluirInvestimento', (tipo, valor, descricao, corretora, 
         cy.get(btnVisualizarInvestimento).click()
         cy.get(textConfirmacaoCadastroInvestimento).should('contain', 'DELETAR TRANSAÇÃO?')
         cy.get(btnDeleteInvestimento).click()
+})
+
+let btnOlho = "#root > div > section > div.itens-paginacao > ul > li > div > button.sc-bYUneI.kqWAb"
+let descricao = "#root > div > section > div.itens-paginacao > ul > li > div > p.sc-ezGUZh.OYKMh"
+
+Cypress.Commands.add('editarInvestimento', (tipo, valor, desc, corretora, data) => {
+    cy.get(btnOlho).click()
+    cy.get(campoValorInvestimento).clear()
+    cy.get(campoDescricaoInvestimento).clear()
+    cy.get(campoCorretoraInvestimento).clear()
+    cy.get(campoTipoInvestimento).select(tipo)
+    cy.get(campoValorInvestimento).type(valor)
+    cy.get(campoDescricaoInvestimento).type(desc)
+    cy.get(campoCorretoraInvestimento).type(corretora)
+    cy.get(campoDataInvestimento).type(data)
+    cy.get(btnCadastrarInvestimento).click()
+    cy.get(descricao).contains(desc)
 })
