@@ -40,16 +40,22 @@ Cypress.Commands.add('generateFixture', () => {
       }
     }),
     'despesa':Cypress._.times(2, () => {
+      let tipo = ["Única", "Recorrente"]
+      let tipoRandom = Math.floor(Math.random() * 2)
+
       return {
-        'tipo': `${Math.floor(Math.random() * 2) + 1}`,
+        'tipo': `${tipo[tipoRandom]}`,
         'valor': `${Math.floor(faker.finance.amount())}`,
         'descricao': `${faker.commerce.productAdjective()}`,
         'data': `${generateRandomBirthday()}`,
       }
     }),
     'investimento':Cypress._.times(2, () => {
+      let tipo = ["Renda variável", "Renda fixa"]
+      let tipoRandom = Math.floor(Math.random() * 2)
+
       return {
-        'tipo': `${Math.floor(Math.random() * 2) + 1}`,
+        'tipo': `${tipo[tipoRandom]}`,
         'valor': `${Math.floor(faker.finance.amount())}`,
         'descricao': `${faker.commerce.productAdjective()}`,
         'corretora': `${faker.commerce.department()}`,
@@ -77,5 +83,5 @@ Cypress.Commands.add('criarUsuarioELogarNoSistema', (nome, email, dataNascimento
   cy.visit("/cadastro")
   cy.cadastrarUsuario(nome, email, dataNascimento, cpf, senha)
   cy.get('.Toastify__toast-body > :nth-child(2)').should('contain', 'Usuário cadastrado com sucesso!')
-  cy.efetuarLogin(email, senha)
+  cy.efetuarLogin(email, senha, "Olá, " + nome)
 })

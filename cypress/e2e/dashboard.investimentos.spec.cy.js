@@ -1,5 +1,23 @@
 /// <references types="cypress"/>
 
+let btnAdicionarInvestimento = '.sc-bBbNsw'
+let textConfirmacaoCadastroInvestimento = '.Toastify__toast-body > :nth-child(2)'
+let campoPesquisarInvestimento = '.sc-cwKisF'
+let btnPesquisarInvestimento = '.sc-lltjXc'
+let textDescricaoInvestimento = '.sc-ezGUZh'
+let textConfirmacaoExclusaoInvestimento = '#\\32  > .Toastify__toast-body > :nth-child(2)'
+let btnInicio = '[href="/sua-carteira"] > span'
+let textInicio = '#root > div > section > h1'
+let btnReceitas = '[href="/receitas"] > span'
+let textTela = '.sc-bcPKhP'
+let btnDespesas = '[href="/despesas"] > span'
+let btnMeusDados = '#root > div > header > div.navegacao > span'
+let textTelaMeusDados = '#root > div > header > div.sc-ksJisA.dlBcrG > div > div > h3'
+let btnSair = '.logout > span'
+let btnLogo = 'a > img'
+let btnFecharTelaAtualizacoInvestimento = '#root > div > div > div.sc-iUeHef.SrCsm > div > span'
+let descricao = '.sc-idyqAC > .Toastify > .Toastify__toast-container > #\\31  > .Toastify__toast-body > :nth-child(2)'
+
 describe('Dashboard - Investimentos', () => {
     
     beforeEach(() => {
@@ -10,104 +28,118 @@ describe('Dashboard - Investimentos', () => {
     it('CT036 - Validar adicionar investimento com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
             cy.criarUsuarioELogarNoSistema(data.usuario[0].nomeCompleto, data.usuario[0].email, data.usuario[0].dataNascimento, data.usuario[0].cpf, data.usuario[0].senha)
-            cy.get('[href="/investimentos"] > span').click()
-            cy.get('.sc-bBbNsw').click()
+            cy.navegarParaTelaDeInvestimento()
+            cy.get(btnAdicionarInvestimento).click()
         })
 
         cy.fixture('transacao.data.json').then(data => {
             cy.cadastrarInvestimento(data.investimento[0].tipo, data.investimento[0].valor, data.investimento[0].descricao, data.investimento[0].corretora, data.investimento[0].data)
-            cy.get('.Toastify__toast-body > :nth-child(2)').should('contain', 'Investimento adicionado com sucesso!')
+            cy.get(textConfirmacaoCadastroInvestimento).should('contain', 'Investimento adicionado com sucesso!')
         })
     })
 
     it('CT037 - Validar campo buscar um investimento com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
-            cy.get('.navegacao > [href="/investimentos"]').click()            
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeInvestimento()
         })
         cy.fixture('transacao.data.json').then(data => {
-            cy.get('.sc-cwKisF').type(data.investimento[0].corretora)
-            cy.get('.sc-lltjXc').click()
-            cy.get('.sc-ezGUZh').should('contain', data.investimento[0].descricao)
+            cy.get(campoPesquisarInvestimento).type(data.investimento[0].corretora)
+            cy.get(btnPesquisarInvestimento).click()
+            cy.get(textDescricaoInvestimento).should('contain', data.investimento[0].descricao)
         })
     })
 
     it('CT039 - Validar excluir um investimento com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
-            cy.get('.navegacao > [href="/investimentos"]').click()
-            cy.get('.sc-bBbNsw').click()          
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeInvestimento()
+            cy.get(btnAdicionarInvestimento).click()          
         })
         cy.fixture('transacao.data.json').then(data => {
             cy.excluirInvestimento(data.investimento[1].tipo, data.investimento[1].valor, data.investimento[1].descricao, data.investimento[1].corretora, data.investimento[1].data)
-            cy.get('#\\32  > .Toastify__toast-body > :nth-child(2)').should('contain', 'Transação excluída com sucesso!')
+            cy.get(textConfirmacaoExclusaoInvestimento).should('contain', 'Transação excluída com sucesso!')
         })
     })
 
     it('CT040 - Validar botão "Início" na tela Investimentos com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
-            cy.get('.navegacao > [href="/investimentos"]').click();  
-            cy.get('.sc-bcPKhP').contains('INVESTIMENTOS');        
-            cy.get('[href="/sua-carteira"] > span').click();
-            cy.get('#root > div > section > h1').contains('Olá, ');    
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeInvestimento()
+            cy.get(btnInicio).click();
+            cy.get(textInicio).contains('Olá, ');    
         })
     })
 
     it('CT052 - Validar botão "Receitas" na tela Investimentos com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
-            cy.get('.navegacao > [href="/investimentos"]').click();  
-            cy.get('.sc-bcPKhP').contains('INVESTIMENTOS');        
-            cy.get('[href="/receitas"] > span').click();
-            cy.get('.sc-bcPKhP').contains('RECEITAS');    
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeInvestimento() 
+            cy.get(btnReceitas).click();
+            cy.get(textTela).contains('RECEITAS');    
         })
     })
 
     it('CT053 - Validar botão "Despesas" na tela Investimentos com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
-            cy.get('.navegacao > [href="/investimentos"]').click();  
-            cy.get('.sc-bcPKhP').contains('INVESTIMENTOS');        
-            cy.get('[href="/despesas"] > span').click();
-            cy.get('.sc-bcPKhP').contains('DESPESAS');    
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeInvestimento()  
+            cy.get(btnDespesas).click();
+            cy.get(textTela).contains('DESPESAS');    
         })
     })
 
     it('CT054 - Validar botão "Meus dados" na tela Investimentos com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
-            cy.get('#root > div > header > div.navegacao > a:nth-child(4) > span').click()
-            cy.get('#root > div > header > div.navegacao > span').click()
-            cy.get('#root > div > header > div.sc-ksJisA.dlBcrG > div > div > h3').contains("VISUALIZAR DADOS")
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeInvestimento()  
+            cy.get(btnMeusDados).click()
+            cy.get(textTelaMeusDados).contains("VISUALIZAR DADOS")
         })
     })
 
     it('CT055 - Validar botão "Sair" na tela Investimentos com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
-            cy.get('.navegacao > [href="/investimentos"]').click();  
-            cy.get('.sc-bcPKhP').contains('INVESTIMENTOS');        
-            cy.get('.logout > span').click();
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeInvestimento()      
+            cy.get(btnSair).click();
             cy.url().should('eq', 'https://wallet-life.vercel.app/')
         })
     })
 
     it('CT056 - Validar botão Logo na tela Investimentos com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.visit("/login")
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
-            cy.get('.navegacao > [href="/investimentos"]').click();  
-            cy.get('.sc-bcPKhP').contains('INVESTIMENTOS');        
-            cy.get('a > img').click();
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeInvestimento()        
+            cy.get(btnLogo).click();
             cy.url().should('eq', 'https://wallet-life.vercel.app/')
+        })
+    })
+
+    it('CT077 - cenário positivo de atualização de investimento', () => {
+
+        cy.fixture('usuario.data.json').then(data => {
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeInvestimento()
+            cy.get(btnAdicionarInvestimento).click()  
+        })
+
+        cy.fixture('transacao.data.json').then(data =>{
+            cy.cadastrarInvestimento(data.investimento[0].tipo, data.investimento[0].valor, data.investimento[0].descricao, data.investimento[0].corretora, data.investimento[0].data)
+            cy.get(btnFecharTelaAtualizacoInvestimento).click()
+            cy.editarInvestimento(data.investimento[0].tipo, data.investimento[1].valor, data.investimento[1].descricao, data.investimento[1].corretora, data.investimento[1].data)
+            cy.get(descricao).contains('Investimento adicionado com sucesso!')
+        })
+    })
+
+    it('CT078 - cenário negativo de atualização de investimento', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeInvestimento()      
+            cy.fixture('transacao.data.json').then(data =>{
+                cy.editarInvestimento(data.investimento[0].tipo, -10, data.investimento[1].descricao, data.investimento[1].corretora, data.investimento[1].data)
+                cy.get(descricao).contains('É necessário preencher todos os campos corretamente!')
+            })
         })
     })
 })

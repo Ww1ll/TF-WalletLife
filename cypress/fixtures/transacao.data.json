@@ -1,46 +1,46 @@
 {
   "receita": [
     {
-      "valor": "880",
-      "descricao": "Genérico",
-      "empresa": "Sapatos",
-      "banco": "Bicicleta"
-    },
-    {
-      "valor": "201",
-      "descricao": "Licenciado",
+      "valor": "625",
+      "descricao": "Inteligente",
       "empresa": "Beleza",
       "banco": "Peixe"
+    },
+    {
+      "valor": "163",
+      "descricao": "Prático",
+      "empresa": "Computadores",
+      "banco": "Luvas"
     }
   ],
   "despesa": [
     {
-      "tipo": "2",
-      "valor": "871",
-      "descricao": "Rústico",
-      "data": "1963-08-06"
+      "tipo": "Recorrente",
+      "valor": "461",
+      "descricao": "Sem marca",
+      "data": "1984-03-01"
     },
     {
-      "tipo": "2",
-      "valor": "107",
-      "descricao": "Ergonômico",
-      "data": "1974-07-02"
+      "tipo": "Recorrente",
+      "valor": "900",
+      "descricao": "Licenciado",
+      "data": "1954-09-17"
     }
   ],
   "investimento": [
     {
-      "tipo": "2",
-      "valor": "66",
+      "tipo": "Renda fixa",
+      "valor": "431",
       "descricao": "Genérico",
       "corretora": "Bebê",
-      "data": "1962-04-20"
+      "data": "1986-05-04"
     },
     {
-      "tipo": "1",
-      "valor": "341",
-      "descricao": "Lustroso",
-      "corretora": "Beleza",
-      "data": "1926-03-22"
+      "tipo": "Renda variável",
+      "valor": "89",
+      "descricao": "Gostoso",
+      "corretora": "Crianças",
+      "data": "1939-02-01"
     }
   ]
 }
