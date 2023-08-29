@@ -226,4 +226,17 @@ describe('Dashboard Receitas', () => {
             cy.get(textMensagemErro).contains('É necessário preencher todos os campos!')
         })
     })
+
+    it('CT074 - Validar atualizar receita com sucesso', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeReceita()
+        })
+
+        cy.fixture('transacao.data.json').then(data => {
+            cy.get(btnVisualizarReceita).click()
+            cy.atualizarReceita(data.receita[1].valor, data.receita[1].descricao, data.receita[1].empresa, data.receita[1].banco)
+            cy.get(textDescricaoReceita).should('contain', data.receita[1].descricao)
+        })
+    })
 })
