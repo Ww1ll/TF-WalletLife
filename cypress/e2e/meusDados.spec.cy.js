@@ -7,7 +7,7 @@ describe('Tela Meus dados', () => {
         cy.generateFixture();
     });
 
-    it.only('CT042 - Validar botão Editar em meus dados com sucesso', () => {
+    it('CT042 - Validar botão Editar em meus dados com sucesso', () => {
       cy.fixture('usuario.data.json').then(data => {
         cy.criarUsuarioELogarNoSistema(data.usuario[0].nomeCompleto, data.usuario[0].email, data.usuario[0].dataNascimento, data.usuario[0].cpf, data.usuario[0].senha)
         cy.get('[data-testid="meus-dados"]').click()
@@ -21,8 +21,19 @@ describe('Tela Meus dados', () => {
       cy.fixture('usuario.data.json').then(data => {
         cy.visit("/login")
         cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+        cy.get('[data-testid="meus-dados"]').click()
+        cy.get(':nth-child(1) > .sc-bcPKhP').contains('DADOS')
       })
-      cy.get('[data-testid="meus-dados"]').click()
-      cy.get(':nth-child(1) > .sc-bcPKhP').contains('DADOS')
     })
+
+    it('CT071 - Validar excluir conta de usuário com sucesso', () => {
+      cy.fixture('usuario.data.json').then(data => {
+        cy.visit("/login")
+        cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+        cy.get("#root > div > header > div.navegacao > span").click()
+        cy.get("#root > div > header > div.sc-ksJisA.dlBcrG > div.sc-hBpgZr.iORPSN > form > div > button.delete").click()
+        cy.get('#root > div > header > div.sc-ksJisA.dlBcrG > div.sc-fnOeiS.kuXGUC > div > div > button.sc-jSwlEQ.dNgWca.btn-delete').click()
+        cy.url().should('eq', 'https://wallet-life.vercel.app/')
+      })
+  })
 })
