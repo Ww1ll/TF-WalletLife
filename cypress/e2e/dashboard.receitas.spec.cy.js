@@ -17,6 +17,8 @@ let btnDespesas = '[href="/despesas"] > span'
 let textTelaAdicionarReceita = '.sc-hhWzdI > div > .sc-bcPKhP'
 let textErroAdicionarReceita = '#\\31  > div.Toastify__toast-body > div:nth-child(2)'
 let textInicio = '.sc-bcPKhP'
+let btnVisualizarReceita = ':nth-child(1) > .sc-iJfdHH > [data-testid="logo-link-home"]'
+let textMensagemErro = '.sc-idyqAC > .Toastify > .Toastify__toast-container > #\\31  > .Toastify__toast-body > :nth-child(2)'
 
 
 describe('Dashboard Receitas', () => {
@@ -143,8 +145,98 @@ describe('Dashboard Receitas', () => {
 
         cy.fixture('transacao.data.json').then(data => {
             cy.cadastrarReceita(-10, data.receita[0].descricao, data.receita[0].empresa, data.receita[0].banco)
-            cy.get(textErroAdicionarReceita).should('contain', 'Adicionar Receita')
-            cy.get('#\\31  > div.Toastify__toast-body > div:nth-child(2)').contains('Receita inválida!')
+            cy.get(telaErroAdicionarReceita).should('contain', 'Adicionar Receita')
+            cy.get(textErroAdicionarReceita).contains('Receita inválida!')
+        })
+    })
+
+    
+    it('CT073.1 - Validar atualizar receita com valor negativo', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeReceita()
+            cy.get(btnAdicionarReceita).click()
+        })
+
+        cy.fixture('transacao.data.json').then(data => {
+            cy.cadastrarReceita(data.receita[0].valor, data.receita[0].descricao, data.receita[0].empresa, data.receita[0].banco)
+            cy.get(textConfirmacaoCadastroReceita).should('contain', 'Receita adicionada com sucesso!')
+            cy.get(btnVisualizarReceita).click()
+            cy.atualizarReceita(-10, data.receita[0].descricao, data.receita[0].empresa, data.receita[0].banco)
+            cy.get(textConfirmacaoCadastroReceita).should('contain', 'Valor inválido!')
+        })
+    })
+    
+    it('CT073.2 - Validar atualizar Receita sem valor', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeReceita()
+        })
+        cy.fixture('transacao.data.json').then(data => {
+            cy.get(btnVisualizarReceita).click()
+            cy.atualizarReceitaSemValor(data.receita[0].descricao, data.receita[0].empresa, data.receita[0].banco)
+            cy.get(textMensagemErro).contains('É necessário preencher todos os campos!')
+        })
+    })
+
+    it('CT073.3 - Validar atualizar Receita sem descrição', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeReceita()
+        })
+        cy.fixture('transacao.data.json').then(data => {
+            cy.get(btnVisualizarReceita).click()
+            cy.atualizarReceitaSemDescricao(data.receita[0].valor, data.receita[0].empresa, data.receita[0].banco)
+            cy.get(textMensagemErro).contains('É necessário preencher todos os campos!')
+        })
+    })
+
+    it('CT073.4 - Validar atualizar Receita sem empresa', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeReceita()
+        })
+        cy.fixture('transacao.data.json').then(data => {
+            cy.get(btnVisualizarReceita).click()
+            cy.atualizarReceitaSemEmpresa(data.receita[0].valor, data.receita[0].descricao, data.receita[0].banco)
+            cy.get(textMensagemErro).contains('É necessário preencher todos os campos!')
+        })
+    })
+
+    it('CT073.5 - Validar atualizar Receita sem banco', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeReceita()
+        })
+        cy.fixture('transacao.data.json').then(data => {
+            cy.get(btnVisualizarReceita).click()
+            cy.atualizarReceitaSemBanco(data.receita[0].valor, data.receita[0].descricao, data.receita[0].empresa)
+            cy.get(textMensagemErro).contains('É necessário preencher todos os campos!')
+        })
+    })
+
+    it('CT073.6 - Validar atualizar Receita com descrição menor que 5 caracteres', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeReceita()
+        })
+        cy.fixture('transacao.data.json').then(data => {
+            cy.get(btnVisualizarReceita).click()
+            cy.atualizarReceita(data.receita[0].valor, data.receita[0].descricao.slice(0,3), data.receita[0].empresa, data.receita[0].banco)
+            cy.get(textMensagemErro).contains('É necessário preencher todos os campos!')
+        })
+    })
+
+    it('CT074 - Validar atualizar receita com sucesso', () => {
+        cy.fixture('usuario.data.json').then(data => {
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeReceita()
+        })
+
+        cy.fixture('transacao.data.json').then(data => {
+            cy.get(btnVisualizarReceita).click()
+            cy.atualizarReceita(data.receita[1].valor, data.receita[1].descricao, data.receita[1].empresa, data.receita[1].banco)
+            cy.get(textDescricaoReceita).should('contain', data.receita[1].descricao)
         })
     })
 })
