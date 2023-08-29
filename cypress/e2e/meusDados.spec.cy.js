@@ -25,4 +25,15 @@ describe('Tela Meus dados', () => {
       })
       cy.navegarParaTelaMeusDados()
     })
+
+    it('CT071 - Validar excluir conta de usuário com sucesso', () => {
+      cy.fixture('usuario.data.json').then(data => {
+        cy.visit("/login")
+        cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+        cy.get("#root > div > header > div.navegacao > span").click()
+        cy.get("#root > div > header > div.sc-ksJisA.dlBcrG > div.sc-hBpgZr.iORPSN > form > div > button.delete").click()
+        cy.get('#root > div > header > div.sc-ksJisA.dlBcrG > div.sc-fnOeiS.kuXGUC > div > div > button.sc-jSwlEQ.dNgWca.btn-delete').click()
+        cy.url().should('eq', 'https://wallet-life.vercel.app/')
+      })
+  })
 })

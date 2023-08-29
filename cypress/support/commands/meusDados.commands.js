@@ -1,3 +1,4 @@
+
 let btnNavegarMeusDados = '[data-testid="meus-dados"]'
 let textTelaMeusDados = ':nth-child(1) > .sc-bcPKhP'
 let botaoEditarDados = "#root > div > header > div.sc-ksJisA.dlBcrG > div.sc-hBpgZr.iORPSN > div > span:nth-child(1)"
@@ -24,3 +25,4 @@ Cypress.Commands.add('navegarParaTelaMeusDadosEEditar', (nome, email, senha) => 
         cy.get(avisoDeEditado).contains("Dados atualizados com sucesso!")
     })
 })
+
