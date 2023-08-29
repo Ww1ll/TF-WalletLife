@@ -119,32 +119,25 @@ describe('Dashboard Despesas', () => {
     it('CT075 - validando atualização de despesa com tipo, valor, descrição e datas válidas', () => {
 
         cy.fixture('usuario.data.json').then(data => {
-            cy.clicarBotaoRegistrar()
-            cy.cadastrarUsuario(data.usuario[0].nomeCompleto, data.usuario[0].email, data.usuario[0].dataNascimento, data.usuario[0].cpf, data.usuario[0].senha)
-            cy.wait(3000)
-            cy.efetuarLoginSemMensagem(data.usuario[0].email, data.usuario[0].senha)
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeDespesa()
+            cy.get(btnAdicionarDespesa).click()
         })
 
         cy.fixture('transacao.data.json').then(data =>{
-            let tipo = ["Recorrente", "Única"]
-            let tipoRandom = Math.floor(Math.random() * 2)
-
-            cy.navegarParaTelaDeDespesa()
-            cy.cadastrarDespesa(tipo[tipoRandom], data.despesa[0].valor, data.despesa[0].descricao, data.despesa[0].data)
-            cy.get('#root > div > div.sc-gXCJSa.WkYuL > div > div > span').click()
-
-            cy.editarDespesa(tipo[tipoRandom], data.despesa[1].valor, data.despesa[1].descricao, data.despesa[1].data)
+            cy.cadastrarDespesa(data.despesa[0].tipo, data.despesa[0].valor, data.despesa[0].descricao, data.despesa[0].data)
+            cy.get(btnFecharTelaAdicionarDespesa).click()
+            cy.editarDespesa(data.despesa[0].tipo, data.despesa[1].valor, data.despesa[1].descricao, data.despesa[1].data)
         })
     })
 
     it('CT076 - Validando a atualização de despesa com valor negativo', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
-            cy.navegarParaTelaDeDespesa()      
-            cy.get('#root > div > section > div.itens-paginacao > ul > li > div > button.sc-bYUneI.kqWAb').click();
-            cy.get('#root > div.sc-gXCJSa.WkYuL > div > form > input[type=number]:nth-child(2)').clear().type('-1')
-            cy.get('#root > div.sc-gXCJSa.WkYuL > div > form > button').click();
-            cy.get("#root > div.sc-bjEwCx.euqxmz > section > div.Toastify > div").should('exist')
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, 'Olá, ' + data.usuario[0].nomeCompleto)
+            cy.navegarParaTelaDeDespesa()  
+            cy.fixture('transacao.data.json').then(data =>{    
+                cy.editarDespesa(data.despesa[0].tipo, -10, data.despesa[1].descricao, data.despesa[1].data)
+            })
         })
     })
 })

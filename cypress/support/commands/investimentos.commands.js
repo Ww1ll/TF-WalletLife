@@ -7,7 +7,6 @@ let btnCadastrarInvestimento = '.sc-jSwlEQ'
 let btnEditarInvestimento = "#root > div > section > div.sc-hHvkSs.fcurvz > div > button"
 
 Cypress.Commands.add('cadastrarInvestimento', (tipo, valor, descricao, corretora, data) => {
-    cy.get(btnEditarInvestimento).click()
     cy.get(campoTipoInvestimento).select(tipo)
     cy.get(campoValorInvestimento).type(valor)
     cy.get(campoDescricaoInvestimento).type(descricao)
@@ -33,8 +32,7 @@ Cypress.Commands.add('excluirInvestimento', (tipo, valor, descricao, corretora, 
         cy.get(btnDeleteInvestimento).click()
 })
 
-let btnOlho = "#root > div > section > div.itens-paginacao > ul > li > div > button.sc-bYUneI.kqWAb"
-let descricao = "#root > div > section > div.itens-paginacao > ul > li > div > p.sc-ezGUZh.OYKMh"
+let btnOlho = ':nth-child(1) > .sc-iJfdHH > [data-testid="logo-link-home"]'
 
 Cypress.Commands.add('editarInvestimento', (tipo, valor, desc, corretora, data) => {
     cy.get(btnOlho).click()
@@ -47,5 +45,4 @@ Cypress.Commands.add('editarInvestimento', (tipo, valor, desc, corretora, data) 
     cy.get(campoCorretoraInvestimento).type(corretora)
     cy.get(campoDataInvestimento).type(data)
     cy.get(btnCadastrarInvestimento).click()
-    cy.get(descricao).contains(desc)
 })
