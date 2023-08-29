@@ -38,7 +38,7 @@ describe('Dashboard - Investimentos', () => {
 
     it('CT037 - Validar campo buscar um investimento com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
             cy.navegarParaTelaDeInvestimento()
         })
         cy.fixture('transacao.data.json').then(data => {
@@ -50,7 +50,7 @@ describe('Dashboard - Investimentos', () => {
 
     it('CT039 - Validar excluir um investimento com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
             cy.navegarParaTelaDeInvestimento()
             cy.get(btnAdicionarInvestimento).click()          
         })
@@ -62,7 +62,7 @@ describe('Dashboard - Investimentos', () => {
 
     it('CT040 - Validar botão "Início" na tela Investimentos com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
             cy.navegarParaTelaDeInvestimento()
             cy.get(btnInicio).click();
             cy.get(textInicio).contains('Olá, ');    
@@ -71,7 +71,7 @@ describe('Dashboard - Investimentos', () => {
 
     it('CT052 - Validar botão "Receitas" na tela Investimentos com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
             cy.navegarParaTelaDeInvestimento() 
             cy.get(btnReceitas).click();
             cy.get(textTela).contains('RECEITAS');    
@@ -80,7 +80,7 @@ describe('Dashboard - Investimentos', () => {
 
     it('CT053 - Validar botão "Despesas" na tela Investimentos com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
             cy.navegarParaTelaDeInvestimento()  
             cy.get(btnDespesas).click();
             cy.get(textTela).contains('DESPESAS');    
@@ -89,7 +89,7 @@ describe('Dashboard - Investimentos', () => {
 
     it('CT054 - Validar botão "Meus dados" na tela Investimentos com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
             cy.navegarParaTelaDeInvestimento()  
             cy.get(btnMeusDados).click()
             cy.get(textTelaMeusDados).contains("VISUALIZAR DADOS")
@@ -98,7 +98,7 @@ describe('Dashboard - Investimentos', () => {
 
     it('CT055 - Validar botão "Sair" na tela Investimentos com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
             cy.navegarParaTelaDeInvestimento()      
             cy.get(btnSair).click();
             cy.url().should('eq', 'https://wallet-life.vercel.app/')
@@ -107,7 +107,7 @@ describe('Dashboard - Investimentos', () => {
 
     it('CT056 - Validar botão Logo na tela Investimentos com sucesso', () => {
         cy.fixture('usuario.data.json').then(data => {
-            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha)
+            cy.efetuarLogin(data.usuario[0].email, data.usuario[0].senha, "Olá, " + data.usuario[0].nomeCompleto)
             cy.navegarParaTelaDeInvestimento()        
             cy.get(btnLogo).click();
             cy.url().should('eq', 'https://wallet-life.vercel.app/')

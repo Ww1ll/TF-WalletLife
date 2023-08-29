@@ -1,18 +1,46 @@
 {
   "receita": [
     {
-      "tipo": "2",
-      "valor": "723",
-      "descricao": "Rústico",
-      "corretora": "Automotivo",
-      "data": "1920-11-05"
+      "valor": "683",
+      "descricao": "Inteligente",
+      "empresa": "Sapatos",
+      "banco": "Camiseta"
     },
     {
+      "valor": "102",
+      "descricao": "Rústico",
+      "empresa": "Automotivo",
+      "banco": "Computador"
+    }
+  ],
+  "despesa": [
+    {
+      "tipo": "1",
+      "valor": "498",
+      "descricao": "Prático",
+      "data": "1981-11-09"
+    },
+    {
+      "tipo": "1",
+      "valor": "645",
+      "descricao": "Genérico",
+      "data": "1972-07-16"
+    }
+  ],
+  "investimento": [
+    {
       "tipo": "2",
-      "valor": "272",
-      "descricao": "Lustroso",
+      "valor": "290",
+      "descricao": "Impressionante",
+      "corretora": "Beleza",
+      "data": "1950-02-01"
+    },
+    {
+      "tipo": "1",
+      "valor": "927",
+      "descricao": "Gostoso",
       "corretora": "Crianças",
-      "data": "1916-06-26"
+      "data": "1932-11-02"
     }
   ]
 }
